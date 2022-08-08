@@ -58,7 +58,10 @@
             <groupId>com.ruoyi</groupId>
             <artifactId>ruoyi-system</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>com.ruoyi</groupId>
+            <artifactId>ruoyi-studio</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
