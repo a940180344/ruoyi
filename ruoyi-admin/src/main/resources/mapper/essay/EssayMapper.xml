@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.essay.mapper.EssayMapper">
+    
+    <resultMap type="Essay" id="EssayResult">
+        <result property="essayId"    column="essay_id"    />
+        <result property="essayContent"    column="essay_content"    />
+        <result property="essayTime"    column="essay_time"    />
+        <result property="essayUser"    column="essay_user"    />
+        <result property="essayTitle"    column="essay_title"    />
+    </resultMap>
+
+    <sql id="selectEssayVo">
+        select essay_id, essay_content, essay_time, essay_user, essay_title from essay
+    </sql>
+
+    <select id="selectEssayList" parameterType="Essay" resultMap="EssayResult">
+        <include refid="selectEssayVo"/>
+        <where>  
+            <if test="essayContent != null  and essayContent != ''"> and essay_content = #{essayContent}</if>
+            <if test="essayTime != null "> and essay_time = #{essayTime}</if>
+            <if test="essayUser != null  and essayUser != ''"> and essay_user = #{essayUser}</if>
+            <if test="essayTitle != null  and essayTitle != ''"> and essay_title = #{essayTitle}</if>
+        </where>
+    </select>
+    
+    <select id="selectEssayByEssayId" parameterType="Long" resultMap="EssayResult">
+        <include refid="selectEssayVo"/>
+        where essay_id = #{essayId}
+    </select>
+        
+    <insert id="insertEssay" parameterType="Essay" useGeneratedKeys="true" keyProperty="essayId">
+        insert into essay
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="essayContent != null">essay_content,</if>
+            <if test="essayTime != null">essay_time,</if>
+            <if test="essayUser != null">essay_user,</if>
+            <if test="essayTitle != null">essay_title,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="essayContent != null">#{essayContent},</if>
+            <if test="essayTime != null">#{essayTime},</if>
+            <if test="essayUser != null">#{essayUser},</if>
+            <if test="essayTitle != null">#{essayTitle},</if>
+         </trim>
+    </insert>
+
+    <update id="updateEssay" parameterType="Essay">
+        update essay
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="essayContent != null">essay_content = #{essayContent},</if>
+            <if test="essayTime != null">essay_time = #{essayTime},</if>
+            <if test="essayUser != null">essay_user = #{essayUser},</if>
+            <if test="essayTitle != null">essay_title = #{essayTitle},</if>
+        </trim>
+        where essay_id = #{essayId}
+    </update>
+
+    <delete id="deleteEssayByEssayId" parameterType="Long">
+        delete from essay where essay_id = #{essayId}
+    </delete>
+
+    <delete id="deleteEssayByEssayIds" parameterType="String">
+        delete from essay where essay_id in 
+        <foreach item="essayId" collection="array" open="(" separator="," close=")">
+            #{essayId}
+        </foreach>
+    </delete>
+</mapper>
