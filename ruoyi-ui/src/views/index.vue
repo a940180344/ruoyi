@@ -25,6 +25,8 @@
       <div class="ql-container ql-snow">
         <div class="essayTitle">
           <h1>{{ essayContxtTitle }}</h1>
+          <p>作者：xxx</p>
+          <p>日期:2001.01.21</p>
         </div>
         <div class="ql-editor" v-html="essayContxt" style="width: 80%;"></div>
       </div>
@@ -113,7 +115,7 @@ export default {
 .essayTitle {
 
   text-align: center;
-  margin-top: -300px;
+  margin-top: -170px;
   color: brown;
 }
 
