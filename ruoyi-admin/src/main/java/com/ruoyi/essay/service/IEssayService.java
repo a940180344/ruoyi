@@ -9,7 +9,6 @@ import com.ruoyi.essay.domain.Essay;
  * @author ruoyi
  * @date 2022-08-08
  */
-
 public interface IEssayService 
 {
     /**

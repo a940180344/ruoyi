@@ -41,7 +41,6 @@ public class EssayController extends BaseController
     @GetMapping("/list")
     public TableDataInfo list(Essay essay)
     {
-
         startPage();
         List<Essay> list = essayService.selectEssayList(essay);
         return getDataTable(list);

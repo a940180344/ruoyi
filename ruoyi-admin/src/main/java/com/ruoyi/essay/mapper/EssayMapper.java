@@ -2,7 +2,6 @@ package com.ruoyi.essay.mapper;
 
 import java.util.List;
 import com.ruoyi.essay.domain.Essay;
-import org.springframework.stereotype.Repository;
 
 /**
  * 发布文章Mapper接口
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Repository;
  * @author ruoyi
  * @date 2022-08-08
  */
-@Repository
 public interface EssayMapper 
 {
     /**

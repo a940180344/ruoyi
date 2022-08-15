@@ -71,7 +71,7 @@ export default {
         },
       ],
       item: 1,
-      item_t: 0,
+      item_t: 1,
       essayList: [],
       essayContxt: '',
       dataTitleList: '',
@@ -91,6 +91,7 @@ export default {
     async getList() {
       const dataProlist = await listEssayFabu();
       this.essayList = dataProlist.rows;
+      console.log(this.essayList)
     },
     async getEssayContxt(essayId) {
       const dataEssayContxt = await getEssayFabu(essayId);
