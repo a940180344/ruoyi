@@ -53,12 +53,13 @@
             size="mini"
             type="text"
             icon="el-icon-edit"
+            @click="studentFun"
           >申请</el-button>
-         
+
         </template>
       </el-table-column>
     </el-table>
-    
+
     <pagination
       v-show="total>0"
       :total="total"
@@ -97,12 +98,34 @@
         <el-button @click="cancel">取 消</el-button>
       </div>
     </el-dialog>
+
+    <!-- 添加或修改用户配置对话框 -->
+    <el-dialog
+      title="提示"
+      :visible.sync="student"
+      width="30%">
+      <el-form ref="form" :model="studentForm"  label-width="80px">
+        <el-form-item label="名字" >
+          <el-input v-model="studentForm.name" placeholder="请输入名字" disabled/>
+        </el-form-item>
+        <el-form-item label="学号" >
+          <el-input v-model="studentForm.studentId" placeholder="请输入学号"  disabled/>
+        </el-form-item>
+        <el-form-item label="理由" >
+          <el-input v-model="studentForm.reason" placeholder="请输入申请理由" />
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+    <el-button @click="student = false">取 消</el-button>
+    <el-button type="primary" @click="student = false">确 定</el-button>
+  </span>
+    </el-dialog>
   </div>
 </template>
 
 <script>
 import { listDept, getDept, delDept, addDept, updateDept } from "@/api/dept/dept";
-
+import {getUserProfile} from "@/api/system/user"
 export default {
   name: "Dept",
   data() {
@@ -125,6 +148,7 @@ export default {
       title: "",
       // 是否显示弹出层
       open: false,
+      user:'',
       // 查询参数
       queryParams: {
         pageNum: 1,
@@ -137,8 +161,16 @@ export default {
         status: null,
         announcement: null,
         project: null,
-        introduction: null
+        introduction: null,
+
       },
+      studentForm:{
+        name:'',
+        studentId:'',
+        reason:'',
+        studioId:''
+      },
+      student:false,
       // 表单参数
       form: {},
       // 表单校验
@@ -151,13 +183,22 @@ export default {
   },
   methods: {
     /** 查询部门列表 */
-    getList() {
+    async getList() {
       this.loading = true;
       listDept(this.queryParams).then(response => {
         this.deptList = response.rows;
         this.total = response.total;
         this.loading = false;
       });
+      const dateUser = await getUserProfile();
+      this.user = dateUser.data;
+      console.log(this.user.userName)
+      this.studentForm.name = this.user.nickName
+      this.studentForm.studentId = this.user.userName
+      console.log(this.user)
+    },
+    studentFun(){
+      this.student = true;
     },
     // 取消按钮
     cancel() {
