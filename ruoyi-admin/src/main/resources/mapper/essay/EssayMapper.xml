@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.essay.mapper.EssayMapper">
     
-    <resultMap type="Essay" id="EssayResult">
+    <resultMap type="com.ruoyi.essay.domain.Essay" id="EssayResult">
         <result property="essayId"    column="essay_id"    />
         <result property="essayContent"    column="essay_content"    />
         <result property="essayTime"    column="essay_time"    />

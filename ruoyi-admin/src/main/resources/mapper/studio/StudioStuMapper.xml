@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.naxin.mapper.StudioStuMapper">
+    
+    <resultMap type="com.ruoyi.naxin.domain.StudioStu" id="StudioStuResult">
+        <result property="dioId"    column="dio_id"    />
+        <result property="dioName"    column="dio_name"    />
+        <result property="dioStudentId"    column="dio_student_id"    />
+        <result property="dioReason"    column="dio_reason"    />
+        <result property="dioStudioId"    column="dio_studio_id"    />
+        <result property="dioStarts"    column="dio_starts"    />
+    </resultMap>
+
+    <sql id="selectStudioStuVo">
+        select dio_id, dio_name, dio_student_id, dio_reason, dio_studio_id, dio_starts from studio_stu
+    </sql>
+
+    <select id="selectStudioStuList" parameterType="StudioStu" resultMap="StudioStuResult">
+        <include refid="selectStudioStuVo"/>
+        <where>  
+            <if test="dioId != null "> and dio_id = #{dioId}</if>
+            <if test="dioName != null  and dioName != ''"> and dio_name like concat('%', #{dioName}, '%')</if>
+            <if test="dioStudentId != null  and dioStudentId != ''"> and dio_student_id = #{dioStudentId}</if>
+            <if test="dioReason != null  and dioReason != ''"> and dio_reason = #{dioReason}</if>
+            <if test="dioStudioId != null "> and dio_studio_id = #{dioStudioId}</if>
+            <if test="dioStarts != null  and dioStarts != ''"> and dio_starts = #{dioStarts}</if>
+        </where>
+    </select>
+    
+    <select id="selectStudioStuByDioId" parameterType="Long" resultMap="StudioStuResult">
+        <include refid="selectStudioStuVo"/>
+        where dio_id = #{dioId}
+    </select>
+        
+    <insert id="insertStudioStu" parameterType="StudioStu" useGeneratedKeys="true" keyProperty="dioId">
+        insert into studio_stu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="dioName != null">dio_name,</if>
+            <if test="dioStudentId != null">dio_student_id,</if>
+            <if test="dioReason != null and dioReason != ''">dio_reason,</if>
+            <if test="dioStudioId != null">dio_studio_id,</if>
+            <if test="dioStarts != null">dio_starts,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="dioName != null">#{dioName},</if>
+            <if test="dioStudentId != null">#{dioStudentId},</if>
+            <if test="dioReason != null and dioReason != ''">#{dioReason},</if>
+            <if test="dioStudioId != null">#{dioStudioId},</if>
+            <if test="dioStarts != null">#{dioStarts},</if>
+         </trim>
+    </insert>
+
+    <update id="updateStudioStu" parameterType="StudioStu">
+        update studio_stu
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="dioName != null">dio_name = #{dioName},</if>
+            <if test="dioStudentId != null">dio_student_id = #{dioStudentId},</if>
+            <if test="dioReason != null and dioReason != ''">dio_reason = #{dioReason},</if>
+            <if test="dioStudioId != null">dio_studio_id = #{dioStudioId},</if>
+            <if test="dioStarts != null">dio_starts = #{dioStarts},</if>
+        </trim>
+        where dio_id = #{dioId}
+    </update>
+
+    <delete id="deleteStudioStuByDioId" parameterType="Long">
+        delete from studio_stu where dio_id = #{dioId}
+    </delete>
+
+    <delete id="deleteStudioStuByDioIds" parameterType="String">
+        delete from studio_stu where dio_id in 
+        <foreach item="dioId" collection="array" open="(" separator="," close=")">
+            #{dioId}
+        </foreach>
+    </delete>
+</mapper>
