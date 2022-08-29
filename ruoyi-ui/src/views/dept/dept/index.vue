@@ -101,18 +101,62 @@
 
     <!-- 添加或修改用户配置对话框 -->
     <el-dialog
-      title="提示"
+      title="学生申请"
       :visible.sync="student"
-      width="30%">
+      width="40%">
       <el-form ref="form" :model="studentForm"  label-width="80px">
-        <el-form-item label="名字" >
-          <el-input v-model="studentForm.name" placeholder="请输入名字" disabled/>
+        <el-col >
+          <el-form-item label="名字" >
+            <el-input v-model="studentForm.name"  disabled/>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="学号" >
+            <el-input v-model="studentForm.studentId"   disabled/>
+          </el-form-item>
+        </el-col>
+
+        <el-col :span="12">
+          <el-form-item label="性别" >
+            <el-input v-model="studentForm.studentId"   disabled/>
+          </el-form-item>
+        </el-col>
+
+        <el-col :span="12">
+          <el-form-item label="年纪" >
+            <el-input v-model="studentForm.studentId"   disabled/>
+          </el-form-item>
+        </el-col>
+
+        <el-col :span="12">
+          <el-form-item label="班级" >
+            <el-input v-model="studentForm.studentId"  disabled/>
+          </el-form-item>
+        </el-col>
+
+        <el-col >
+          <el-form-item label="学习情况" >
+            <el-input
+              type="textarea" :rows="3"  placeholder="请输入学习情况"/>
+          </el-form-item>
+        </el-col>
+          <el-form-item label="特长说明" >
+            <el-input
+              type="textarea" :rows="3"  placeholder="请输入特长说明""/>
+          </el-form-item>
+          <el-form-item label="学习方向和期望" >
+            <el-input
+              type="textarea" :rows="3" v-model="studentForm.reason"  placeholder="请输入学习方向和期望"/>
+          </el-form-item>
+
+        <el-form-item label="个人简介" >
+          <el-input type="textarea" :rows="3" v-model="studentForm.reason" placeholder="请输入个人简介" />
         </el-form-item>
-        <el-form-item label="学号" >
-          <el-input v-model="studentForm.studentId" placeholder="请输入学号"  disabled/>
-        </el-form-item>
-        <el-form-item label="理由" >
-          <el-input v-model="studentForm.reason" placeholder="请输入申请理由" />
+        <el-form-item label="上传附件" prop="field102" required>
+          <el-upload ref="field102" :file-list="field102fileList" :action="field102Action"
+                     :before-upload="field102BeforeUpload">
+            <el-button size="small" type="primary" icon="el-icon-upload">点击上传</el-button>
+          </el-upload>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">

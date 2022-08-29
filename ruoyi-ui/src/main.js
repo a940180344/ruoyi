@@ -4,7 +4,6 @@ import Cookies from 'js-cookie'
 
 import Element from 'element-ui'
 import './assets/styles/element-variables.scss'
-import vuetify from '@/plugins/vuetify'
 import '@/assets/styles/index.scss' // global css
 import '@/assets/styles/ruoyi.scss' // ruoyi css
 import App from './App'
@@ -81,7 +80,6 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
-  vuetify,
   store,
   render: h => h(App)
 })
