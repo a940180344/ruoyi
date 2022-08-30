@@ -88,6 +88,13 @@
             @click="handleDelete(scope.row)"
             v-hasPermi="['studio:studioNaxin:remove']"
           >通过</el-button>
+          <el-button
+            size="mini"
+            type="text"
+            icon="el-icon-position"
+            @click="studentDetailDig = true"
+            v-hasPermi="['studio:studioNaxin:remove']"
+          >详情</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -105,9 +112,76 @@
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
       </el-form>
       <div slot="footer" class="dialog-footer">
+
         <el-button type="primary" @click="submitForm">确 定</el-button>
         <el-button @click="cancel">取 消</el-button>
       </div>
+    </el-dialog>
+
+    <el-dialog
+      title="学生申请"
+      :visible.sync="studentDetailDig"
+      width="40%">
+      <el-form ref="form" :model="studentDetail"  label-width="80px">
+        <el-col >
+          <el-form-item label="名字" >
+            <el-input v-model="studentDetail.name"  disabled/>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="学号" >
+            <el-input v-model="studentDetail.studentId"   disabled/>
+          </el-form-item>
+        </el-col>
+
+        <el-col :span="12">
+          <el-form-item label="性别" >
+            <el-input v-model="studentDetail.studentId"   disabled/>
+          </el-form-item>
+        </el-col>
+
+        <el-col :span="12">
+          <el-form-item label="年纪" >
+            <el-input v-model="studentDetail.studentId"   disabled/>
+          </el-form-item>
+        </el-col>
+
+        <el-col :span="12">
+          <el-form-item label="班级" >
+            <el-input v-model="studentDetail.studentId"  disabled/>
+          </el-form-item>
+        </el-col>
+
+        <el-col >
+          <el-form-item label="学习情况" >
+            <el-input
+              type="textarea" :rows="3"  placeholder="请输入学习情况"/>
+          </el-form-item>
+        </el-col>
+        <el-form-item label="特长说明" >
+          <el-input
+            type="textarea" :rows="3"  placeholder="请输入特长说明""/>
+        </el-form-item>
+        <el-form-item label="学习方向和期望" >
+          <el-input
+            type="textarea" :rows="3" v-model="studentDetail.reason"  placeholder="请输入学习方向和期望"/>
+        </el-form-item>
+
+        <el-form-item label="个人简介" >
+          <el-input type="textarea" :rows="3" v-model="studentDetail.reason" placeholder="请输入个人简介" />
+        </el-form-item>
+        <el-form-item label="上传附件" prop="field102" required>
+          <el-upload ref="field102" :file-list="field102fileList" :action="field102Action"
+                     :before-upload="field102BeforeUpload">
+            <el-button size="small" type="primary" icon="el-icon-upload">点击下载</el-button>
+          </el-upload>
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button type="danger" @click="student = false" style="float: left">拒 绝</el-button>
+    <el-button @click="student = false">取 消</el-button>
+    <el-button type="primary" @click="student = false">通 过</el-button>
+  </span>
     </el-dialog>
   </div>
 </template>
@@ -119,6 +193,9 @@ export default {
   name: "StudioNaxin",
   data() {
     return {
+      studentDetail:[],
+      studentDetailDig:false,
+      dataPro:{},
       // 遮罩层
       loading: true,
       // 选中数组
@@ -132,7 +209,8 @@ export default {
       // 总条数
       total: 0,
       // 纳新表格数据
-      studioNaxinList: [],
+      studioNaxinList: [
+      ],
       // 弹出层标题
       title: "",
       // 是否显示弹出层
