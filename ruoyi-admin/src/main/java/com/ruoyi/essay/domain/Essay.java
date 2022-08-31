@@ -37,60 +37,75 @@ public class Essay extends BaseEntity
     @Excel(name = "标题")
     private String essayTitle;
 
-    public void setEssayId(Long essayId) 
+    /** 文章类型 */
+    @Excel(name = "文章类型")
+    private String essayTag;
+
+    public void setEssayId(Long essayId)
     {
         this.essayId = essayId;
     }
 
-    public Long getEssayId() 
+    public Long getEssayId()
     {
         return essayId;
     }
-    public void setEssayContent(String essayContent) 
+    public void setEssayContent(String essayContent)
     {
         this.essayContent = essayContent;
     }
 
-    public String getEssayContent() 
+    public String getEssayContent()
     {
         return essayContent;
     }
-    public void setEssayTime(Date essayTime) 
+    public void setEssayTime(Date essayTime)
     {
         this.essayTime = essayTime;
     }
 
-    public Date getEssayTime() 
+    public Date getEssayTime()
     {
         return essayTime;
     }
-    public void setEssayUser(String essayUser) 
+    public void setEssayUser(String essayUser)
     {
         this.essayUser = essayUser;
     }
 
-    public String getEssayUser() 
+    public String getEssayUser()
     {
         return essayUser;
     }
-    public void setEssayTitle(String essayTitle) 
+    public void setEssayTitle(String essayTitle)
     {
         this.essayTitle = essayTitle;
     }
 
-    public String getEssayTitle() 
+    public String getEssayTitle()
     {
         return essayTitle;
+    }
+    public void setEssayTag(String essayTag)
+    {
+        this.essayTag = essayTag;
+    }
+
+    public String getEssayTag()
+    {
+        return essayTag;
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("essayId", getEssayId())
-            .append("essayContent", getEssayContent())
-            .append("essayTime", getEssayTime())
-            .append("essayUser", getEssayUser())
-            .append("essayTitle", getEssayTitle())
-            .toString();
+                .append("essayId", getEssayId())
+                .append("essayContent", getEssayContent())
+                .append("essayTime", getEssayTime())
+                .append("essayUser", getEssayUser())
+                .append("essayTitle", getEssayTitle())
+                .append("essayTag", getEssayTag())
+                .toString();
     }
 }
+
