@@ -1,14 +1,6 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="68px">
-      <el-form-item label="id" prop="dioId">
-        <el-input
-          v-model="queryParams.dioId"
-          placeholder="请输入id"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
       <el-form-item label="name" prop="dioName">
         <el-input
           v-model="queryParams.dioName"
@@ -21,14 +13,6 @@
         <el-input
           v-model="queryParams.dioStudentId"
           placeholder="请输入学生学号"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="工作室id" prop="dioStudioId">
-        <el-input
-          v-model="queryParams.dioStudioId"
-          placeholder="请输入工作室id"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -71,7 +55,13 @@
       <el-table-column label="学生学号" align="center" prop="dioStudentId" />
       <el-table-column label="申请理由" align="center" prop="dioReason" />
       <el-table-column label="工作室id" align="center" prop="dioStudioId" />
-      <el-table-column label="审批状态" align="center" prop="dioStarts" />
+      <el-table-column label="审批状态" align="center" prop="dioStarts" >
+        <template slot-scope="scope">
+          <el-tag :type="scope.row.dioStarts | proStartsFilter">
+            {{ scope.row.dioStarts }}
+          </el-tag>
+        </template>
+      </el-table-column>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
@@ -95,6 +85,12 @@
             @click="studentDetailDig = true"
             v-hasPermi="['studio:studioNaxin:remove']"
           >详情</el-button>
+          <el-button
+            size="mini"
+            type="text"
+            icon="el-icon-position"
+            @click="detailTiaoZhuan(scope.row.dioStudentId)"
+          >跳转</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -191,6 +187,16 @@ import { listStudioNaxin, getStudioNaxin, delStudioNaxin, addStudioNaxin, update
 
 export default {
   name: "StudioNaxin",
+  filters: {
+    proStartsFilter(proStarts) {
+      const statusMap = {
+        已完成: 'success',//已完成
+        执行中: '',//执行中
+        待负责人审批: 'warning'//队列中
+      }
+      return statusMap[proStarts]
+    }
+  },
   data() {
     return {
       studentDetail:[],
@@ -241,6 +247,12 @@ export default {
     this.getList();
   },
   methods: {
+    detailTiaoZhuan(studentId){
+      this.$router.push({
+        path: '/studio/studentdetail',
+        query: { studentId: studentId },
+      })
+    },
     /** 查询纳新列表 */
     getList() {
       this.loading = true;
