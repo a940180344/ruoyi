@@ -106,6 +106,8 @@ public class Essay extends BaseEntity
                 .append("essayTitle", getEssayTitle())
                 .append("essayTag", getEssayTag())
                 .toString();
+
+
     }
 }
 
