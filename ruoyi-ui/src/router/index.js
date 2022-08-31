@@ -41,11 +41,29 @@ export const constantRoutes = [
       }
     ]
   },
+  //
+  // {
+  //   path: '/studio/studioNaxin/studentDetail',
+  //   component: Layout,
+  //   hidden: true,
+  //   redirect: 'noredirect',
+  // },
   {
     path: '/login',
     component: () => import('@/views/login'),
     hidden: true
   },
+  {
+    path: '/essaylogin',
+    component: () => import('@/views/essaylogin'),
+    hidden: true
+  },
+  {
+    path: '/loginshouye',
+    component: () => import('@/views/loginshouye'),
+    hidden: true
+  },
+
   {
     path: '/register',
     component: () => import('@/views/register'),

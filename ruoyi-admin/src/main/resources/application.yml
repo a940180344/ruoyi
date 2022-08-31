@@ -23,7 +23,7 @@ server:
     # 应用的访问路径
     context-path: /
   tomcat:
-    # tomcat的URI编码
+    # tomcat的URI编码ignore
     uri-encoding: UTF-8
     # 连接数满后的排队数，默认为100
     accept-count: 1000

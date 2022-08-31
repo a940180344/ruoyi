@@ -8,7 +8,9 @@ import { isRelogin } from '@/utils/request'
 
 NProgress.configure({ showSpinner: false })
 
-const whiteList = ['/login', '/auth-redirect', '/bind', '/register']
+
+
+const whiteList = ['/login', '/auth-redirect','/essaylogin', '/bind', '/register','/loginshouye']
 
 router.beforeEach((to, from, next) => {
   NProgress.start()

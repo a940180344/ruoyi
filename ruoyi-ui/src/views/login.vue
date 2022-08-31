@@ -1,5 +1,5 @@
 <template>
-  <div class="login">
+  <div id="login">
     <el-container>
 
       <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect"
@@ -13,7 +13,8 @@
 
         <div class="right-1">
           <el-menu-item index="7">
-            <div @click="dialogVisible = true">
+<!--            <div @click="dialogVisible = true">-->
+            <div @click="tiaohzuan">
             <i class="el-icon-s-custom" style="color: white"></i>
             </div>
           </el-menu-item>
@@ -62,7 +63,7 @@ el-icon-sort-up"></i><span style="font-weight:900;font-size:large">工作室动�
             <div class="menu2left"><div class="block">
               <el-carousel height="300px">
                 <el-carousel-item v-for="item in main2lunbo" :key="item">
-                  <div>
+                  <div id="imgLubo1">
                     <img
                       style="height:280px;width: 100%"
                       class="cobot"
@@ -239,7 +240,9 @@ el-icon-sort-up"></i><span style="font-weight:900;font-size:large">工作室动�
   </span>
     </el-dialog>
 
-
+<!--  <el-button @click="dianji(34)">-->
+<!--    dianwoowowo-->
+<!--  </el-button>-->
   </div>
 </template>
 
@@ -310,7 +313,18 @@ export default {
     this.getCookie();
   },
   methods: {
-    getCode() {
+    tiaohzuan(){
+      this.$router.push({
+        path: '/loginshouye',
+      })
+    },
+    dianji(id){
+      this.$router.push({
+          path: '/essaylogin',
+          query: { id: id },
+        })
+    },
+    getCode(){
       getCodeImg().then(res => {
         this.captchaEnabled = res.captchaEnabled === undefined ? true : res.captchaEnabled;
         if (this.captchaEnabled) {
@@ -428,7 +442,7 @@ export default {
 
 
 /*等于左边栏宽度*/
-.login
+#login
 #app,
 .el-container {
   padding: 0px;
@@ -452,7 +466,7 @@ export default {
 }
 
 .box-card {
-  opacity: 0.8;
+  opacity: 0.85;
 }
 .loginFooterImg{
   display: flex;
