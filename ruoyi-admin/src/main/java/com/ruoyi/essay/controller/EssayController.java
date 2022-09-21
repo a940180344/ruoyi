@@ -37,7 +37,7 @@ public class EssayController extends BaseController
     /**
      * 查询发布文章列表
      */
-    @PreAuthorize("@ss.hasPermi('essay:essayFabu:list')")
+//    @PreAuthorize("@ss.hasPermi('essay:essayFabu:list')")
     @GetMapping("/list")
     public TableDataInfo list(Essay essay)
     {
@@ -62,7 +62,6 @@ public class EssayController extends BaseController
     /**
      * 获取发布文章详细信息
      */
-    @PreAuthorize("@ss.hasPermi('essay:essayFabu:query')")
     @GetMapping(value = "/{essayId}")
     public AjaxResult getInfo(@PathVariable("essayId") Long essayId)
     {
