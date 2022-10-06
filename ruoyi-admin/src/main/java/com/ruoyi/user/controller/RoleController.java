@@ -32,6 +32,7 @@ public class RoleController extends BaseController {
     public AjaxResult list(){
         return AjaxResult.success(userrService.list());
     }
+
     @GetMapping("/procss")
     public AjaxResult getProcss(){
         QueryWrapper<Role> roleWrapper=new QueryWrapper();
@@ -55,5 +56,8 @@ public class RoleController extends BaseController {
 
         return AjaxResult.success(userrs);
     }
+
+
+
 
 }

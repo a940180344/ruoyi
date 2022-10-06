@@ -37,7 +37,23 @@ public class ArlSub implements Serializable
 
     /** 审批人id */
     @Excel(name = "审批人id")
-    private Long userId;
+    private Long roleId;
+
+    public Long getHostId() {
+        return hostId;
+    }
+
+    public Long getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
+    }
+
+    public void setOrder(Long order) {
+        this.order = order;
+    }
 
     /** 审批进程顺序 */
     @Excel(name = "审批进程顺序")
@@ -54,23 +70,6 @@ public class ArlSub implements Serializable
         this.hostId = hostId;
     }
 
-    public Long getHostId()
-    {
-        return hostId;
-    }
-    public void setUserId(Long userId)
-    {
-        this.userId = userId;
-    }
-
-    public Long getUserId()
-    {
-        return userId;
-    }
-    public void setOrder(Long order)
-    {
-        this.order = order;
-    }
 
     public Long getOrder()
     {
@@ -92,7 +91,6 @@ public class ArlSub implements Serializable
 
                 .append("id", getId())
                 .append("hostId", getHostId())
-                .append("userId", getUserId())
                 .append("order", getOrder())
                 .append("name", getName())
                 .toString();

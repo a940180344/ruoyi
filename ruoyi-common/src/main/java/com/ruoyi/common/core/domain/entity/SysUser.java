@@ -89,6 +89,36 @@ public class SysUser extends BaseEntity
     /** 角色ID */
     private Long roleId;
 
+    private String translation;
+
+    private String academy;
+
+    public String getTranslation() {
+        return translation;
+    }
+
+    public void setTranslation(String translation) {
+        this.translation = translation;
+    }
+
+    public String getAcademy() {
+        return academy;
+    }
+
+    public void setAcademy(String academy) {
+        this.academy = academy;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
+
+    private String grade;
+
     public SysUser()
     {
 
@@ -319,6 +349,9 @@ public class SysUser extends BaseEntity
             .append("updateTime", getUpdateTime())
             .append("remark", getRemark())
             .append("dept", getDept())
+                .append("translation", getTranslation())
+                .append("academy", getAcademy())
+                .append("grade", getGrade())
             .toString();
     }
 }

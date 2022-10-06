@@ -12,8 +12,6 @@ public class SeachFrom {
 
     private int pageSize;
 
-
-
     private int page;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
