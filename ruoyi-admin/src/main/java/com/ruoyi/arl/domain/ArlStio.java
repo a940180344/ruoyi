@@ -49,6 +49,26 @@ public class ArlStio implements Serializable
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate CreateTime;
 
+    private String stioShuoming;
+
+    public String getStioShuoming() {
+        return stioShuoming;
+    }
+
+    public void setStioShuoming(String stioShuoming) {
+        this.stioShuoming = stioShuoming;
+    }
+
+    public String getStioType() {
+        return stioType;
+    }
+
+    public void setStioType(String stioType) {
+        this.stioType = stioType;
+    }
+
+    private String stioType;
+
     /** 工作室名 */
     @Excel(name = "工作室名")
     private String stioName;

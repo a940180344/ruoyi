@@ -76,7 +76,7 @@ public class ArlStioController extends BaseController {
 
         QueryWrapper<ArlStio> queryWrapper=new QueryWrapper();
         queryWrapper.eq("stio_teacher",userId);
-        queryWrapper.orderByDesc("create_time");
+        queryWrapper.orderByAsc("id");
 
         return AjaxResult.success(arlStioService.list(queryWrapper));
     }
@@ -124,6 +124,8 @@ public class ArlStioController extends BaseController {
         arlStio.setStart("通过");
         Long hostId = arlStio.getHostId();
         Long appOrder = arlStio.getAppOrder();
+        LocalDate date = LocalDate.now();
+        arlStio.setCreateTime(date);
 
         QueryWrapper<ArlSub> queryWrapper=new QueryWrapper();
         queryWrapper.eq("host_id",hostId);
@@ -165,6 +167,8 @@ public class ArlStioController extends BaseController {
     @PostMapping("/overrule")
     public AjaxResult overrule(@RequestBody ArlStio arlStio){
         arlStio.setStart("驳回");
+        LocalDate date = LocalDate.now();
+        arlStio.setCreateTime(date);
         arlStioService.updateById(arlStio);
         return AjaxResult.success("操作成功");
     }
@@ -176,6 +180,8 @@ public class ArlStioController extends BaseController {
     @PostMapping("/refuse")
     public AjaxResult refuse(@RequestBody ArlStio arlStio){
         arlStio.setStart("拒绝");
+        LocalDate date = LocalDate.now();
+        arlStio.setCreateTime(date);
         arlStioService.updateById(arlStio);
         return AjaxResult.success("操作成功");
     }

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.arl.xs.mapper.AlrXsMapper">
+    
+    <resultMap type="com.ruoyi.arl.xs.domain.AlrXs" id="AlrXsResult">
+        <result property="xsId"    column="xs_id"    />
+        <result property="id"    column="id"    />
+        <result property="hostId"    column="host_id"    />
+        <result property="xsContxtApper"    column="xs_contxt_apper"    />
+        <result property="xsFile"    column="xs_file"    />
+        <result property="xsContxtTeacher"    column="xs_contxt_teacher"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectAlrXsVo">
+        select xs_id, id, host_id, xs_contxt_apper, xs_file, xs_contxt_teacher, create_time from alr_xs
+    </sql>
+
+    <select id="selectAlrXsList" parameterType="AlrXs" resultMap="AlrXsResult">
+        <include refid="selectAlrXsVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+            <if test="hostId != null "> and host_id = #{hostId}</if>
+            <if test="xsContxtApper != null  and xsContxtApper != ''"> and xs_contxt_apper = #{xsContxtApper}</if>
+            <if test="xsFile != null  and xsFile != ''"> and xs_file = #{xsFile}</if>
+            <if test="xsContxtTeacher != null  and xsContxtTeacher != ''"> and xs_contxt_teacher = #{xsContxtTeacher}</if>
+        </where>
+    </select>
+    
+    <select id="selectAlrXsByXsId" parameterType="Long" resultMap="AlrXsResult">
+        <include refid="selectAlrXsVo"/>
+        where xs_id = #{xsId}
+    </select>
+        
+    <insert id="insertAlrXs" parameterType="AlrXs">
+        insert into alr_xs
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="xsId != null">xs_id,</if>
+            <if test="id != null">id,</if>
+            <if test="hostId != null">host_id,</if>
+            <if test="xsContxtApper != null">xs_contxt_apper,</if>
+            <if test="xsFile != null">xs_file,</if>
+            <if test="xsContxtTeacher != null">xs_contxt_teacher,</if>
+            <if test="createTime != null">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="xsId != null">#{xsId},</if>
+            <if test="id != null">#{id},</if>
+            <if test="hostId != null">#{hostId},</if>
+            <if test="xsContxtApper != null">#{xsContxtApper},</if>
+            <if test="xsFile != null">#{xsFile},</if>
+            <if test="xsContxtTeacher != null">#{xsContxtTeacher},</if>
+            <if test="createTime != null">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateAlrXs" parameterType="AlrXs">
+        update alr_xs
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="id != null">id = #{id},</if>
+            <if test="hostId != null">host_id = #{hostId},</if>
+            <if test="xsContxtApper != null">xs_contxt_apper = #{xsContxtApper},</if>
+            <if test="xsFile != null">xs_file = #{xsFile},</if>
+            <if test="xsContxtTeacher != null">xs_contxt_teacher = #{xsContxtTeacher},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+        </trim>
+        where xs_id = #{xsId}
+    </update>
+
+    <delete id="deleteAlrXsByXsId" parameterType="Long">
+        delete from alr_xs where xs_id = #{xsId}
+    </delete>
+
+    <delete id="deleteAlrXsByXsIds" parameterType="String">
+        delete from alr_xs where xs_id in 
+        <foreach item="xsId" collection="array" open="(" separator="," close=")">
+            #{xsId}
+        </foreach>
+    </delete>
+</mapper>
