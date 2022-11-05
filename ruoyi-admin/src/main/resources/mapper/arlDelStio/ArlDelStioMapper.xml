@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.arl.mapper.ArlDelStioMapper">
+    
+    <resultMap type="com.ruoyi.arl.domain.ArlDelStio" id="ArlDelStioResult">
+        <result property="id"    column="id"    />
+        <result property="start"    column="start"    />
+        <result property="hostId"    column="host_id"    />
+        <result property="appOrder"    column="app_order"    />
+        <result property="delStioName"    column="del_stio_name"    />
+        <result property="delStioReason"    column="del_stio_reason"    />
+        <result property="delStioOpinion"    column="del_stio_opinion"    />
+        <result property="delStioAppover"    column="del_stio_appover"    />
+        <result property="dekStioShuoming"    column="dek_stio_shuoming"    />
+    </resultMap>
+
+    <sql id="selectArlDelStioVo">
+        select id, start, host_id, app_order, del_stio_name, del_stio_reason, del_stio_opinion, del_stio_appover, dek_stio_shuoming from arl_del_stio
+    </sql>
+
+    <select id="selectArlDelStioList" parameterType="ArlDelStio" resultMap="ArlDelStioResult">
+        <include refid="selectArlDelStioVo"/>
+        <where>  
+            <if test="start != null  and start != ''"> and start = #{start}</if>
+            <if test="hostId != null "> and host_id = #{hostId}</if>
+            <if test="appOrder != null "> and app_order = #{appOrder}</if>
+            <if test="delStioName != null  and delStioName != ''"> and del_stio_name like concat('%', #{delStioName}, '%')</if>
+            <if test="delStioReason != null  and delStioReason != ''"> and del_stio_reason = #{delStioReason}</if>
+            <if test="delStioOpinion != null  and delStioOpinion != ''"> and del_stio_opinion = #{delStioOpinion}</if>
+            <if test="delStioAppover != null "> and del_stio_appover = #{delStioAppover}</if>
+            <if test="dekStioShuoming != null  and dekStioShuoming != ''"> and dek_stio_shuoming = #{dekStioShuoming}</if>
+        </where>
+    </select>
+    
+    <select id="selectArlDelStioById" parameterType="Long" resultMap="ArlDelStioResult">
+        <include refid="selectArlDelStioVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertArlDelStio" parameterType="ArlDelStio" useGeneratedKeys="true" keyProperty="id">
+        insert into arl_del_stio
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="start != null">start,</if>
+            <if test="hostId != null">host_id,</if>
+            <if test="appOrder != null">app_order,</if>
+            <if test="delStioName != null">del_stio_name,</if>
+            <if test="delStioReason != null">del_stio_reason,</if>
+            <if test="delStioOpinion != null">del_stio_opinion,</if>
+            <if test="delStioAppover != null">del_stio_appover,</if>
+            <if test="dekStioShuoming != null">dek_stio_shuoming,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="start != null">#{start},</if>
+            <if test="hostId != null">#{hostId},</if>
+            <if test="appOrder != null">#{appOrder},</if>
+            <if test="delStioName != null">#{delStioName},</if>
+            <if test="delStioReason != null">#{delStioReason},</if>
+            <if test="delStioOpinion != null">#{delStioOpinion},</if>
+            <if test="delStioAppover != null">#{delStioAppover},</if>
+            <if test="dekStioShuoming != null">#{dekStioShuoming},</if>
+         </trim>
+    </insert>
+
+    <update id="updateArlDelStio" parameterType="ArlDelStio">
+        update arl_del_stio
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="start != null">start = #{start},</if>
+            <if test="hostId != null">host_id = #{hostId},</if>
+            <if test="appOrder != null">app_order = #{appOrder},</if>
+            <if test="delStioName != null">del_stio_name = #{delStioName},</if>
+            <if test="delStioReason != null">del_stio_reason = #{delStioReason},</if>
+            <if test="delStioOpinion != null">del_stio_opinion = #{delStioOpinion},</if>
+            <if test="delStioAppover != null">del_stio_appover = #{delStioAppover},</if>
+            <if test="dekStioShuoming != null">dek_stio_shuoming = #{dekStioShuoming},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteArlDelStioById" parameterType="Long">
+        delete from arl_del_stio where id = #{id}
+    </delete>
+
+    <delete id="deleteArlDelStioByIds" parameterType="String">
+        delete from arl_del_stio where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

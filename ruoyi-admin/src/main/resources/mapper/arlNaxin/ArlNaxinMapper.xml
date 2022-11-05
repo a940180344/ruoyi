@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.arl.mapper.ArlNaxinMapper">
+    
+    <resultMap type="com.ruoyi.arl.domain.ArlNaxin" id="ArlNaxinResult">
+        <result property="id"    column="id"    />
+        <result property="start"    column="start"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="hostId"    column="host_id"    />
+        <result property="appOrder"    column="app_order"    />
+        <result property="userId"    column="user_id"    />
+        <result property="stioId"    column="stio_id"    />
+        <result property="naxinReason"    column="naxin_reason"    />
+        <result property="naxinOpinion"    column="naxin_opinion"    />
+        <result property="naxinAppover"    column="naxin_appover"    />
+        <result property="naxinShuoming"    column="naxin_shuoming"    />
+    </resultMap>
+
+    <sql id="selectArlNaxinVo">
+        select id, start, create_time, host_id, app_order, user_id, stio_id, naxin_reason, naxin_opinion, naxin_appover, naxin_shuoming from arl_naxin
+    </sql>
+
+    <select id="selectArlNaxinList" parameterType="ArlNaxin" resultMap="ArlNaxinResult">
+        <include refid="selectArlNaxinVo"/>
+        <where>  
+            <if test="start != null  and start != ''"> and start = #{start}</if>
+            <if test="hostId != null "> and host_id = #{hostId}</if>
+            <if test="appOrder != null "> and app_order = #{appOrder}</if>
+            <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
+            <if test="stioId != null "> and stio_id = #{stioId}</if>
+            <if test="naxinReason != null  and naxinReason != ''"> and naxin_reason = #{naxinReason}</if>
+            <if test="naxinOpinion != null  and naxinOpinion != ''"> and naxin_opinion = #{naxinOpinion}</if>
+            <if test="naxinAppover != null "> and naxin_appover = #{naxinAppover}</if>
+            <if test="naxinShuoming != null  and naxinShuoming != ''"> and naxin_shuoming = #{naxinShuoming}</if>
+        </where>
+    </select>
+    
+    <select id="selectArlNaxinById" parameterType="Long" resultMap="ArlNaxinResult">
+        <include refid="selectArlNaxinVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertArlNaxin" parameterType="ArlNaxin" useGeneratedKeys="true" keyProperty="id">
+        insert into arl_naxin
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="start != null">start,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="hostId != null">host_id,</if>
+            <if test="appOrder != null">app_order,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="stioId != null">stio_id,</if>
+            <if test="naxinReason != null">naxin_reason,</if>
+            <if test="naxinOpinion != null">naxin_opinion,</if>
+            <if test="naxinAppover != null">naxin_appover,</if>
+            <if test="naxinShuoming != null">naxin_shuoming,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="start != null">#{start},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="hostId != null">#{hostId},</if>
+            <if test="appOrder != null">#{appOrder},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="stioId != null">#{stioId},</if>
+            <if test="naxinReason != null">#{naxinReason},</if>
+            <if test="naxinOpinion != null">#{naxinOpinion},</if>
+            <if test="naxinAppover != null">#{naxinAppover},</if>
+            <if test="naxinShuoming != null">#{naxinShuoming},</if>
+         </trim>
+    </insert>
+
+    <update id="updateArlNaxin" parameterType="ArlNaxin">
+        update arl_naxin
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="start != null">start = #{start},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="hostId != null">host_id = #{hostId},</if>
+            <if test="appOrder != null">app_order = #{appOrder},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="stioId != null">stio_id = #{stioId},</if>
+            <if test="naxinReason != null">naxin_reason = #{naxinReason},</if>
+            <if test="naxinOpinion != null">naxin_opinion = #{naxinOpinion},</if>
+            <if test="naxinAppover != null">naxin_appover = #{naxinAppover},</if>
+            <if test="naxinShuoming != null">naxin_shuoming = #{naxinShuoming},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteArlNaxinById" parameterType="Long">
+        delete from arl_naxin where id = #{id}
+    </delete>
+
+    <delete id="deleteArlNaxinByIds" parameterType="String">
+        delete from arl_naxin where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
