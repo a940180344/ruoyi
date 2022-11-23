@@ -2,6 +2,10 @@ package com.ruoyi.web.controller.system;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -52,7 +56,12 @@ public class SysRoleController extends BaseController
     @Autowired
     private ISysUserService userService;
 
-    @PreAuthorize("@ss.hasPermi('system:role:list')")
+    @ApiOperation("根据角色属性查询")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType="query", name = "pageSize", value = "分页每页数量", required = true, dataType = "Integer"),
+            @ApiImplicitParam(paramType="query", name = "page", value = "分页之第几页", required = true, dataType = "Integer"),
+            @ApiImplicitParam(paramType="query", name = "roleName", value = "角色属性", required = true, dataType = "String[]"),
+    })
     @GetMapping("/list")
     public TableDataInfo list(SysRole role)
     {

@@ -3,6 +3,9 @@ package com.ruoyi.web.controller.system;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.common.core.domain.model.LoginUser;
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -50,6 +53,37 @@ public class SysUserController extends BaseController
     private ISysPostService postService;
 
     /**
+     * 获取部门用户列表
+     */
+    @GetMapping("/dept/list")
+    public TableDataInfo deptList(SysUser user)
+    {
+        LoginUser loginUser = getLoginUser();
+        SysUser loUser = loginUser.getUser();
+        Long deptId = loUser.getDeptId();
+        user.setDeptId(deptId);
+
+        startPage();
+
+        List<SysUser> list = userService.selectUserList(user);
+        return getDataTable(list);
+    }
+
+    @Log(title = "用户管理", businessType = BusinessType.EXPORT)
+    @PostMapping("/dept/export")
+    public void deptExport(HttpServletResponse response, SysUser user)
+    {
+        LoginUser loginUser = getLoginUser();
+        SysUser loUser = loginUser.getUser();
+        Long deptId = loUser.getDeptId();
+        user.setDeptId(deptId);
+
+        List<SysUser> list = userService.selectUserList(user);
+        ExcelUtil<SysUser> util = new ExcelUtil<SysUser>(SysUser.class);
+        util.exportExcel(response, list, "用户数据");
+    }
+
+    /**
      * 获取用户列表
      */
     @PreAuthorize("@ss.hasPermi('system:user:list')")
@@ -62,7 +96,6 @@ public class SysUserController extends BaseController
     }
 
     @Log(title = "用户管理", businessType = BusinessType.EXPORT)
-    @PreAuthorize("@ss.hasPermi('system:user:export')")
     @PostMapping("/export")
     public void export(HttpServletResponse response, SysUser user)
     {
@@ -93,7 +126,7 @@ public class SysUserController extends BaseController
     /**
      * 根据用户编号获取详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:user:query')")
+    @ApiOperation("根据用户编号获取详细信息")
     @GetMapping(value = { "/", "/{userId}" })
     public AjaxResult getInfo(@PathVariable(value = "userId", required = false) Long userId)
     {

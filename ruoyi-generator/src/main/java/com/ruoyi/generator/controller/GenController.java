@@ -190,10 +190,9 @@ public class GenController extends BaseController
      */
     @Log(title = "代码生成", businessType = BusinessType.GENCODE)
     @GetMapping("/batchGenCode")
-    public void batchGenCode(HttpServletResponse response, String tables) throws IOException
+    public void batchGenCode(HttpServletResponse response, String tabpanes) throws IOException
     {
-        tables = "arl_del_stio";
-        String[] tableNames = Convert.toStrArray(tables);
+        String[] tableNames = Convert.toStrArray(tabpanes);
         byte[] data = genTableService.downloadCode(tableNames);
         genCode(response, data);
     }

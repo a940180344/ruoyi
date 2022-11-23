@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.ruoyi.arl.domain.ArlSub;
 import com.ruoyi.arl.domain.SeachFrom;
@@ -14,6 +15,10 @@ import com.ruoyi.common.core.domain.entity.SysRole;
 import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.common.core.domain.model.LoginUser;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.user.domain.Userr;
+import com.ruoyi.user.domain.UserrRole;
+import com.ruoyi.user.service.RoleService;
+import com.ruoyi.user.service.UserrRoleServicee;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -54,6 +59,16 @@ public class ArlNaxinController extends BaseController
 
     @Autowired
     private IArlSubService arlSubService;
+
+    @Autowired
+    private UserrRoleServicee userrRoleServicee;
+
+
+    @GetMapping("/test")
+    public AjaxResult test(){
+        return AjaxResult.success(userrRoleServicee.list());
+    }
+
 
     /**
      * 申请工作室(纳新)
@@ -128,7 +143,7 @@ public class ArlNaxinController extends BaseController
         SysUser user = loginUser.getUser();
         List<SysRole> roleIds = user.getRoles();
         Long roleId = roleIds.get(0).getRoleId();
-        String academy = user.getAcademy();
+        Long deptId = user.getDeptId();
 
         QueryWrapper<ArlNaxin> queryWrapper=new QueryWrapper();
         boolean p = seachFrom.getDateRangeBool();
@@ -140,8 +155,8 @@ public class ArlNaxinController extends BaseController
             queryWrapper.eq("start",seachFrom.getProStarts());
         }
 
-        queryWrapper.eq("naxin_appover",roleId);//
-
+        queryWrapper.eq("stio_id",deptId);//
+        queryWrapper.eq("app_order",roleId);//
         queryWrapper.orderByDesc("start");
         IPage<ArlNaxin> ArlStioIPage = arlNaxinService.page(new com.baomidou.mybatisplus.extension.plugins.pagination.Page<>(seachFrom.getPage(),seachFrom.getPageSize()),queryWrapper);
 
@@ -172,6 +187,11 @@ public class ArlNaxinController extends BaseController
             /***
              * 修改学生属性为加入工作室
              */
+            UpdateWrapper<UserrRole> updateWrapper = new UpdateWrapper<>();
+            updateWrapper.eq("user_id",arlNaxin.getUserId());
+            UserrRole user = new UserrRole();
+            //user.setRoleId(100L);//添加学生角色
+            userrRoleServicee.update(user, updateWrapper);
 
 
             return AjaxResult.success("操作成功");
@@ -246,7 +266,17 @@ public class ArlNaxinController extends BaseController
 
     @GetMapping("/list")
     public TableDataInfo list(ArlNaxin arlNaxin)
-    {
+    {   LoginUser loginUser = getLoginUser();
+        SysUser user = loginUser.getUser();
+        Long deptId = user.getDeptId();
+        List<SysRole> roleIds = user.getRoles();
+        Long roleId = roleIds.get(0).getRoleId();
+
+        arlNaxin.setAppOrder(roleId);
+        arlNaxin.setStioId(deptId);
+//        if(!deptId.equals(1L)){
+
+//        }
         startPage();
         List<ArlNaxin> list = arlNaxinService.selectArlNaxinList(arlNaxin);
         return getDataTable(list);
@@ -260,6 +290,11 @@ public class ArlNaxinController extends BaseController
     @PostMapping("/export")
     public void export(HttpServletResponse response, ArlNaxin arlNaxin)
     {
+        LoginUser loginUser = getLoginUser();
+        SysUser loUser = loginUser.getUser();
+        Long deptId = loUser.getDeptId();
+        arlNaxin.setStioId(deptId);
+
         List<ArlNaxin> list = arlNaxinService.selectArlNaxinList(arlNaxin);
         ExcelUtil<ArlNaxin> util = new ExcelUtil<ArlNaxin>(ArlNaxin.class);
         util.exportExcel(response, list, "naxin数据");
