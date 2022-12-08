@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.ruoyi.arl.domain.ArlHost;
 import com.ruoyi.arl.domain.ArlSub;
 import com.ruoyi.arl.domain.SeachFrom;
 import com.ruoyi.arl.service.IArlHostService;
@@ -90,13 +91,22 @@ public class ArlNaxinController extends BaseController
         Long userId = user.getUserId();
 
         QueryWrapper wrapper = new QueryWrapper();
-        wrapper.eq("host_id",arlNaxin.getHostId());
+
+        QueryWrapper hostWrapper = new QueryWrapper();
+        hostWrapper.eq("name","纳新申请");
+        hostWrapper.eq("start","正常");
+        List<ArlHost> arlHosts = arlHostService.list(hostWrapper);
+
+        wrapper.eq("host_id",arlHosts.get(0).getId());
+        arlNaxin.setHostId(arlHosts.get(0).getId());
         List<ArlSub> arlSubs = arlSubService.list(wrapper);
 
         arlNaxin.setCreateTime(DateUtils.getNowDate());
         arlNaxin.setStart("待审批");
         Long order = Long.valueOf(1);
         arlNaxin.setAppOrder(order);
+
+
 
         arlNaxin.setUserId(userId);
         arlNaxin.setNaxinAppover(arlSubs.get(0).getRoleId());

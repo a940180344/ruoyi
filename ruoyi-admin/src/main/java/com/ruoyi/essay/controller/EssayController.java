@@ -25,10 +25,10 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * 发布文章Controller
  * 
  * @author ruoyi
- * @date 2022-08-08
+ * @date 2022-11-24
  */
 @RestController
-@RequestMapping("/essay/essayFabu")
+@RequestMapping("/essay/essay")
 public class EssayController extends BaseController
 {
     @Autowired
@@ -37,7 +37,7 @@ public class EssayController extends BaseController
     /**
      * 查询发布文章列表
      */
-//    @PreAuthorize("@ss.hasPermi('essay:essayFabu:list')")
+
     @GetMapping("/list")
     public TableDataInfo list(Essay essay)
     {
@@ -49,7 +49,7 @@ public class EssayController extends BaseController
     /**
      * 导出发布文章列表
      */
-    @PreAuthorize("@ss.hasPermi('essay:essayFabu:export')")
+
     @Log(title = "发布文章", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, Essay essay)
@@ -62,6 +62,7 @@ public class EssayController extends BaseController
     /**
      * 获取发布文章详细信息
      */
+
     @GetMapping(value = "/{essayId}")
     public AjaxResult getInfo(@PathVariable("essayId") Long essayId)
     {
@@ -71,18 +72,19 @@ public class EssayController extends BaseController
     /**
      * 新增发布文章
      */
-    @PreAuthorize("@ss.hasPermi('essay:essayFabu:add')")
     @Log(title = "发布文章", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody Essay essay)
     {
+        //加创建者。部门
         return toAjax(essayService.insertEssay(essay));
     }
+
 
     /**
      * 修改发布文章
      */
-    @PreAuthorize("@ss.hasPermi('essay:essayFabu:edit')")
+
     @Log(title = "发布文章", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody Essay essay)
@@ -93,7 +95,7 @@ public class EssayController extends BaseController
     /**
      * 删除发布文章
      */
-    @PreAuthorize("@ss.hasPermi('essay:essayFabu:remove')")
+
     @Log(title = "发布文章", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{essayIds}")
     public AjaxResult remove(@PathVariable Long[] essayIds)

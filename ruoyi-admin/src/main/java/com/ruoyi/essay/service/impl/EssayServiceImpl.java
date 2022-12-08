@@ -1,6 +1,12 @@
 package com.ruoyi.essay.service.impl;
 
 import java.util.List;
+
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.ruoyi.arl.domain.ArlDelStio;
+import com.ruoyi.arl.mapper.ArlDelStioMapper;
+import com.ruoyi.arl.service.IArlDelStioService;
+import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.essay.mapper.EssayMapper;
@@ -11,10 +17,10 @@ import com.ruoyi.essay.service.IEssayService;
  * 发布文章Service业务层处理
  * 
  * @author ruoyi
- * @date 2022-08-08
+ * @date 2022-11-24
  */
 @Service
-public class EssayServiceImpl implements IEssayService 
+public class EssayServiceImpl extends ServiceImpl<EssayMapper, Essay> implements IEssayService
 {
     @Autowired
     private EssayMapper essayMapper;
@@ -52,6 +58,7 @@ public class EssayServiceImpl implements IEssayService
     @Override
     public int insertEssay(Essay essay)
     {
+        essay.setCreateTime(DateUtils.getNowDate());
         return essayMapper.insertEssay(essay);
     }
 

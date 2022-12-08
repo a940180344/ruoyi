@@ -1,15 +1,18 @@
 package com.ruoyi.essay.service;
 
 import java.util.List;
+
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.ruoyi.arl.domain.ArlDelStio;
 import com.ruoyi.essay.domain.Essay;
 
 /**
  * 发布文章Service接口
  * 
  * @author ruoyi
- * @date 2022-08-08
+ * @date 2022-11-24
  */
-public interface IEssayService 
+public interface IEssayService extends IService<Essay>
 {
     /**
      * 查询发布文章

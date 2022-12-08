@@ -7,22 +7,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <resultMap type="com.ruoyi.essay.domain.Essay" id="EssayResult">
         <result property="essayId"    column="essay_id"    />
         <result property="essayContent"    column="essay_content"    />
-        <result property="essayTime"    column="essay_time"    />
-        <result property="essayUser"    column="essay_user"    />
         <result property="essayTitle"    column="essay_title"    />
+        <result property="essayTag"    column="essay_tag"    />
+        <result property="essaySource"    column="essay_source"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createBy"    column="create_by"    />
     </resultMap>
 
     <sql id="selectEssayVo">
-        select essay_id, essay_content, essay_time, essay_user, essay_title from essay
+        select essay_id, essay_content, essay_title, essay_tag, essay_source, create_time, create_by from essay
     </sql>
 
     <select id="selectEssayList" parameterType="Essay" resultMap="EssayResult">
         <include refid="selectEssayVo"/>
         <where>  
             <if test="essayContent != null  and essayContent != ''"> and essay_content = #{essayContent}</if>
-            <if test="essayTime != null "> and essay_time = #{essayTime}</if>
-            <if test="essayUser != null  and essayUser != ''"> and essay_user = #{essayUser}</if>
             <if test="essayTitle != null  and essayTitle != ''"> and essay_title = #{essayTitle}</if>
+            <if test="essayTag != null  and essayTag != ''"> and essay_tag = #{essayTag}</if>
+            <if test="essaySource != null  and essaySource != ''"> and essay_source = #{essaySource}</if>
         </where>
     </select>
     
@@ -35,15 +37,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         insert into essay
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="essayContent != null">essay_content,</if>
-            <if test="essayTime != null">essay_time,</if>
-            <if test="essayUser != null">essay_user,</if>
             <if test="essayTitle != null">essay_title,</if>
+            <if test="essayTag != null">essay_tag,</if>
+            <if test="essaySource != null">essay_source,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="createBy != null">create_by,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="essayContent != null">#{essayContent},</if>
-            <if test="essayTime != null">#{essayTime},</if>
-            <if test="essayUser != null">#{essayUser},</if>
             <if test="essayTitle != null">#{essayTitle},</if>
+            <if test="essayTag != null">#{essayTag},</if>
+            <if test="essaySource != null">#{essaySource},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="createBy != null">#{createBy},</if>
          </trim>
     </insert>
 
@@ -51,9 +57,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         update essay
         <trim prefix="SET" suffixOverrides=",">
             <if test="essayContent != null">essay_content = #{essayContent},</if>
-            <if test="essayTime != null">essay_time = #{essayTime},</if>
-            <if test="essayUser != null">essay_user = #{essayUser},</if>
             <if test="essayTitle != null">essay_title = #{essayTitle},</if>
+            <if test="essayTag != null">essay_tag = #{essayTag},</if>
+            <if test="essaySource != null">essay_source = #{essaySource},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
         </trim>
         where essay_id = #{essayId}
     </update>

@@ -1,15 +1,18 @@
 package com.ruoyi.essay.mapper;
 
 import java.util.List;
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.ruoyi.arl.domain.ArlHost;
 import com.ruoyi.essay.domain.Essay;
 
 /**
  * 发布文章Mapper接口
  * 
  * @author ruoyi
- * @date 2022-08-08
+ * @date 2022-11-24
  */
-public interface EssayMapper 
+public interface EssayMapper extends BaseMapper<Essay>
 {
     /**
      * 查询发布文章
