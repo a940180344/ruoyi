@@ -3,6 +3,7 @@ package com.ruoyi.arl.controller;
 import java.time.LocalDate;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.constraints.Null;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
@@ -23,7 +24,7 @@ import com.ruoyi.user.service.UserrRoleServicee;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.security.access.prepost.PreAuthorize;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -89,6 +90,15 @@ public class ArlNaxinController extends BaseController
         LoginUser loginUser = getLoginUser();
         SysUser user = loginUser.getUser();
         Long userId = user.getUserId();
+        arlNaxin.setUserId(userId);
+        if(booleanAlnaxin(arlNaxin) == false){
+            return AjaxResult.error("已申请过该工作室");
+        }
+
+
+
+
+
 
         QueryWrapper wrapper = new QueryWrapper();
 
@@ -108,11 +118,22 @@ public class ArlNaxinController extends BaseController
 
 
 
-        arlNaxin.setUserId(userId);
+
         arlNaxin.setNaxinAppover(arlSubs.get(0).getRoleId());
         arlNaxinService.save(arlNaxin);
 
         return AjaxResult.success("tianjiachenggong");
+    }
+
+    private boolean booleanAlnaxin(ArlNaxin arlNaxin) {
+        QueryWrapper wrapper = new QueryWrapper();
+        wrapper.eq("stio_id",arlNaxin.getStioId());
+        wrapper.eq("user_id",arlNaxin.getUserId());
+        List<ArlNaxin> arlNaxins =  arlNaxinService.list(wrapper);
+        if(arlNaxins.isEmpty()){
+            return true;
+        }
+        return false;
     }
 
     /**
