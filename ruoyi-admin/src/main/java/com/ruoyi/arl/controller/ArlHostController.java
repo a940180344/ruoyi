@@ -1,19 +1,19 @@
 package com.ruoyi.arl.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.ruoyi.arl.domain.ArlHost;
-import com.ruoyi.arl.domain.ArlSub;
-import com.ruoyi.arl.service.IArlHostService;
-import com.ruoyi.arl.service.IArlSubService;
+import com.ruoyi.arl.domain.*;
+import com.ruoyi.arl.service.*;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.common.core.domain.model.LoginUser;
 import io.swagger.annotations.ApiOperation;
+import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -25,6 +25,13 @@ public class ArlHostController extends BaseController {
 
   @Autowired
   private IArlSubService arlSubService;
+
+  @Autowired
+  private IArlDelStioService arlDelStioService;
+  @Autowired
+  private IArlNaxinService arlNaxinService;
+  @Autowired
+  private IArlStioService arlStioService;
 
   /**
    * 修改进程
@@ -93,6 +100,66 @@ public class ArlHostController extends BaseController {
     List<ArlHost> ArlHostList = arlHostService.list(queryWrapper);
     return AjaxResult.success(ArlHostList);
   }
+  /**
+   * 获取用户所有进程包括历史的
+   * @return
+   */
+  @ApiOperation("获取用户所有进程包括历史的")
+  @GetMapping("/getAllUserApp")
+  public AjaxResult getUserApp(){
+    Long userId =  getUserId();
+    return AjaxResult.success(getAllAppr(userId));
+  }
 
+  private List getAllAppr(Long userId) {
+    List<AllApr> allApprs = new ArrayList<>();
 
+    QueryWrapper<ArlNaxin> queryWrapper=new QueryWrapper();
+    queryWrapper.eq("user_id",userId);
+    queryWrapper.orderByAsc("id");
+    List<ArlNaxin> arlNaxins = arlNaxinService.list(queryWrapper);
+
+    QueryWrapper<ArlDelStio> queryWrapperArlDelStio=new QueryWrapper();
+    queryWrapperArlDelStio.eq("user_id",userId);
+    queryWrapperArlDelStio.orderByAsc("id");
+    List<ArlDelStio> arlDelStios = arlDelStioService.list(queryWrapperArlDelStio);
+
+    QueryWrapper<ArlStio> queryWrapperArlStio=new QueryWrapper();
+    queryWrapperArlStio.eq("stio_teacher",userId);
+    queryWrapperArlStio.orderByAsc("id");
+    List<ArlStio> arlStios = arlStioService.list(queryWrapperArlStio);
+
+    if (arlNaxins.size() != 0){
+      AllApr allApr = new AllApr();
+      allApr.setName("纳新申请");
+      allApr.setOwnList(arlNaxins);
+      allApr.setSubList(getSubList(arlNaxins.get(0).getHostId()));
+      allApr.setCrrut(arlNaxins.get(arlNaxins.size()-1).getAppOrder());
+      allApprs.add(allApr);
+    }
+    if (arlDelStios.size() != 0){
+      AllApr allApr = new AllApr();
+      allApr.setName("工作室销毁");
+      allApr.setOwnList(arlDelStios);
+      allApr.setSubList(getSubList(arlDelStios.get(0).getHostId()));
+      allApr.setCrrut(arlDelStios.get(arlDelStios.size()-1).getAppOrder());
+      allApprs.add(allApr);
+    }
+    if (arlStios.size() != 0){
+      AllApr allApr = new AllApr();
+      allApr.setName("工作室申请");
+      allApr.setOwnList(arlStios);
+      allApr.setSubList(getSubList(arlStios.get(0).getHostId()));
+      allApr.setCrrut(arlStios.get(arlStios.size()-1).getAppOrder());
+      allApprs.add(allApr);
+    }
+    return allApprs;
+  }
+  private List getSubList(Long hostId){
+    QueryWrapper<ArlSub> queryWrapper=new QueryWrapper();
+    queryWrapper.eq("host_id",hostId);
+    queryWrapper.orderByAsc("id");
+    List<ArlSub> arlSubs = arlSubService.list(queryWrapper);
+    return arlSubs;
+  }
 }
