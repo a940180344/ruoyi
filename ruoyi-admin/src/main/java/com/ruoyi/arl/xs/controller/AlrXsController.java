@@ -2,6 +2,9 @@ package com.ruoyi.arl.xs.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.arl.domain.ArlHost;
+import com.ruoyi.arl.service.IArlHostService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,6 +34,8 @@ import com.ruoyi.common.core.page.TableDataInfo;
 @RequestMapping("/xs/xs")
 public class AlrXsController extends BaseController
 {
+    @Autowired
+    private IArlHostService arlHostService;
     @Autowired
     private IAlrXsService alrXsService;
 
@@ -73,6 +78,9 @@ public class AlrXsController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody AlrXs alrXs)
     {
+        ArlHost arlHost = arlHostService.getById(alrXs.getHostId());
+        String apprName = arlHost.getName();
+
         return toAjax(alrXsService.insertAlrXs(alrXs));
     }
 

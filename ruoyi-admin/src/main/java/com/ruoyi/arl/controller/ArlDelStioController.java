@@ -33,6 +33,7 @@ import com.ruoyi.arl.domain.ArlDelStio;
 import com.ruoyi.arl.service.IArlDelStioService;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.core.page.TableDataInfo;
+import org.springframework.web.servlet.HandlerInterceptor;
 
 /**
  * delStioController
@@ -44,6 +45,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
 @RequestMapping("/delStio/del_stio")
 public class ArlDelStioController extends BaseController
 {
+
     @Autowired
     private IArlDelStioService arlDelStioService;
 
@@ -76,7 +78,6 @@ public class ArlDelStioController extends BaseController
 
         arlDelStio.setDelStioAppover(arlSubs.get(0).getRoleId());
         arlDelStioService.save(arlDelStio);
-
         return AjaxResult.success("tianjiachenggong");
     }
 
