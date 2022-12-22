@@ -22,7 +22,7 @@
 ps：人工智能学院的申请只能有人工智能学院院长审批。其他同理
 
 ## 演示图例
-<table style="width:100%; text-align:center">
+<table style="width:200%; text-align:center">
 <tbody>
 <tr>
   <td>
