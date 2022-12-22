@@ -1,5 +1,6 @@
 - 本项目基于 [RuoYi-Vue](http://ruoyi.vip/) 进行二次开发，高校工作室的工作流应用场景。
-
+- 设计时没有考虑清楚项目耦合度高，对标毕设项目
+- 推荐一个工作流项目：https://gitee.com/KonBAI-Q/ruoyi-flowable-plus/releases/tag/v0.6.0
 ## 参考文档
 - 项目需求文档：[工作室管理系统框架与需求-（情暖工程信息平台）](https://kdocs.cn/l/cu5Fn40XKipL)
 - （注：该项目主要还是以指导老师意见为主，文档参考价值较小）
