@@ -184,5 +184,19 @@ public class ArlStioController extends BaseController {
         arlStio.setCreateTime(date);
         arlStioService.updateById(arlStio);
         return AjaxResult.success("操作成功");
+
+    }
+
+        @GetMapping(value = "/{id}")
+        public AjaxResult getInfo(@PathVariable("id") Long id)
+        {
+            return AjaxResult.success(arlStioService.getById(id));
+        }
+
+    @PutMapping
+    public AjaxResult edit(@RequestBody ArlStio arlStio)
+    {
+    arlStio.setStart("待审批");
+       return toAjax(arlStioService.updateById(arlStio));
     }
 }

@@ -3,8 +3,14 @@ package com.ruoyi.arl.xs.controller;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ruoyi.arl.domain.ArlDelStio;
 import com.ruoyi.arl.domain.ArlHost;
+import com.ruoyi.arl.domain.ArlNaxin;
+import com.ruoyi.arl.domain.ArlStio;
+import com.ruoyi.arl.service.IArlDelStioService;
 import com.ruoyi.arl.service.IArlHostService;
+import com.ruoyi.arl.service.IArlNaxinService;
+import com.ruoyi.arl.service.IArlStioService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,6 +44,14 @@ public class AlrXsController extends BaseController
     private IArlHostService arlHostService;
     @Autowired
     private IAlrXsService alrXsService;
+    @Autowired
+    private IArlStioService arlStioService;
+
+    @Autowired
+    private IArlDelStioService arlDelStioService;
+
+    @Autowired
+    private IArlNaxinService arlNaxinService;
 
     /**
      * 查询协商列表
@@ -81,7 +95,30 @@ public class AlrXsController extends BaseController
         ArlHost arlHost = arlHostService.getById(alrXs.getHostId());
         String apprName = arlHost.getName();
 
+        updateArlHost(apprName,alrXs.getId());
+
         return toAjax(alrXsService.insertAlrXs(alrXs));
+    }
+
+    private void updateArlHost(String apprName,Long id) {
+        if(apprName.equals("工作室申请")){
+            ArlStio arlStio = new ArlStio();
+            arlStio.setId(id);
+            arlStio.setStart("协商");
+            arlStioService.updateById(arlStio);
+        }
+        if(apprName.equals("工作室销毁")){
+            ArlDelStio arlDelStio = new ArlDelStio();
+            arlDelStio.setId(id);
+            arlDelStio.setStart("协商");
+            arlDelStioService.updateById(arlDelStio);
+        }
+        if(apprName.equals("纳新申请")){
+            ArlNaxin arlNaxin = new ArlNaxin();
+            arlNaxin.setId(id);
+            arlNaxin.setStart("协商");
+            arlNaxinService.updateById(arlNaxin);
+        }
     }
 
     /**
@@ -103,4 +140,5 @@ public class AlrXsController extends BaseController
     {
         return toAjax(alrXsService.deleteAlrXsByXsIds(xsIds));
     }
+
 }
