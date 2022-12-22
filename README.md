@@ -34,31 +34,6 @@ ps：人工智能学院的申请只能有人工智能学院院长审批。其他
     <img src="https://gulimail-lin.oss-cn-fuzhou.aliyuncs.com/%E5%90%8D%E5%B8%88%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9Fgif/%E5%B7%A5%E4%BD%9C%E5%AE%A4%E5%AE%A1%E6%89%B9%E9%80%9A%E8%BF%87.gif" alt="用户管理"/>
   </td>
 </tr>
-<tr>
-  <td>
-    <span>工作室协商过程</span>
-    <img src="https://gulimail-lin.oss-cn-fuzhou.aliyuncs.com/%E5%90%8D%E5%B8%88%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9Fgif/%E5%8D%8F%E5%95%86.gif" alt="流程分类"/>
-  </td>
-</tr>
-<tr>
-  <td>
-    <span>查看文章</span>
-    <img src="https://gulimail-lin.oss-cn-fuzhou.aliyuncs.com/%E5%90%8D%E5%B8%88%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9Fgif/%E6%9F%A5%E7%9C%8B%E6%96%87%E7%AB%A0.gif" alt="流程定义"/>
-  </td>
-  <td>
-    <span>发布文章</span>
-    <img src="https://gulimail-lin.oss-cn-fuzhou.aliyuncs.com/%E5%90%8D%E5%B8%88%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9Fgif/%E5%8F%91%E5%B8%83%E6%96%87%E7%AB%A0.gif" alt="流程发起"/>
-  </td>
-</tr>
-<tr>
-  <td>
-    <span>个人详情</span>
-    <img src="https://gulimail-lin.oss-cn-fuzhou.aliyuncs.com/%E5%90%8D%E5%B8%88%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9Fgif/%E4%B8%AA%E4%BA%BA%E8%AF%A6%E6%83%85.png" alt="表单设计"/>
-  </td>
-   <td>
-    <span>工作室详情</span>
-    <img src="https://gulimail-lin.oss-cn-fuzhou.aliyuncs.com/%E5%90%8D%E5%B8%88%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9Fgif/%E5%B7%A5%E4%BD%9C%E5%AE%A4%E8%AF%A6%E6%83%85.png" alt="发起流程"/>
-  </td>
-</tr>
+
 </tbody>
 </table>
