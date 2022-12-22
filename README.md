@@ -39,6 +39,10 @@ ps：人工智能学院的申请只能有人工智能学院院长审批。其他
     <span>工作室协商过程</span>
     <img src="https://gulimail-lin.oss-cn-fuzhou.aliyuncs.com/%E5%90%8D%E5%B8%88%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9Fgif/%E5%8D%8F%E5%95%86.gif" alt="流程分类"/>
   </td>
+  <td>
+    <span>流程表单</span>
+   
+  </td>
 </tr>
 <tr>
   <td>
