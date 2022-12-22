@@ -21,26 +21,24 @@
 | 普通学生（法学院）  |    Mstudent         |默认密码|
 
 ps：人工智能学院的申请只能有人工智能学院院长审批。其他同理
-## 支持项目
-
 
 ## 演示图例
 <table style="width:100%; text-align:center">
 <tbody>
 <tr>
   <td>
-    <span>登录页面</span>
-   <img src="https://gitee.com/a940180344/images/raw/master/%E5%90%8D%E5%B8%88%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9Fgif/%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6%E4%BB%8B%E7%BB%8D.gif" alt="流程控制介绍"/>
+    <span>流程控制介绍</span>
+   <img src="https://gulimail-lin.oss-cn-fuzhou.aliyuncs.com/%E5%90%8D%E5%B8%88%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9Fgif/%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6%E4%BB%8B%E7%BB%8D.gif" alt="流程控制介绍"/>
   </td>
   <td>
-    <span>用户管理</span>
-    <img src="https://images.gitee.com/uploads/images/2022/0424/164236_2de3b8da_5096840.png" alt="用户管理"/>
+    <span>工作室申请审批通过过程</span>
+    <img src="https://gulimail-lin.oss-cn-fuzhou.aliyuncs.com/%E5%90%8D%E5%B8%88%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9Fgif/%E5%B7%A5%E4%BD%9C%E5%AE%A4%E5%AE%A1%E6%89%B9%E9%80%9A%E8%BF%87.gif" alt="用户管理"/>
   </td>
 </tr>
 <tr>
   <td>
-    <span>流程分类</span>
-    <img src="https://images.gitee.com/uploads/images/2022/0424/164839_ca79b066_5096840.png" alt="流程分类"/>
+    <span>工作室协商过程</span>
+    <img src="https://gulimail-lin.oss-cn-fuzhou.aliyuncs.com/%E5%90%8D%E5%B8%88%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9Fgif/%E5%8D%8F%E5%95%86.gif" alt="流程分类"/>
   </td>
   <td>
     <span>流程表单</span>
@@ -49,52 +47,22 @@ ps：人工智能学院的申请只能有人工智能学院院长审批。其他
 </tr>
 <tr>
   <td>
-    <span>流程定义</span>
-    <img src="https://images.gitee.com/uploads/images/2022/0424/165916_825a85c8_5096840.png" alt="流程定义"/>
+    <span>查看文章</span>
+    <img src="https://gulimail-lin.oss-cn-fuzhou.aliyuncs.com/%E5%90%8D%E5%B8%88%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9Fgif/%E6%9F%A5%E7%9C%8B%E6%96%87%E7%AB%A0.gif" alt="流程定义"/>
   </td>
   <td>
-    <span>流程发起</span>
-    <img src="https://images.gitee.com/uploads/images/2022/0424/171409_ffb0faf3_5096840.png" alt="流程发起"/>
-  </td>
-</tr>
-<tr>
-  <td>
-    <span>表单设计</span>
-    <img src="https://images.gitee.com/uploads/images/2022/0424/172933_7222c0f2_5096840.png" alt="表单设计"/>
-  </td>
-  <td>
-    <span>流程设计</span>
-    <img src="https://images.gitee.com/uploads/images/2022/0424/165827_44fa412b_5096840.png" alt="流程设计"/>
+    <span>发布文章</span>
+    <img src="https://gulimail-lin.oss-cn-fuzhou.aliyuncs.com/%E5%90%8D%E5%B8%88%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9Fgif/%E5%8F%91%E5%B8%83%E6%96%87%E7%AB%A0.gif" alt="流程发起"/>
   </td>
 </tr>
 <tr>
   <td>
-    <span>发起流程</span>
-    <img src="https://images.gitee.com/uploads/images/2022/0424/171651_4639254b_5096840.png" alt="发起流程"/>
+    <span>个人详情</span>
+    <img src="https://gulimail-lin.oss-cn-fuzhou.aliyuncs.com/%E5%90%8D%E5%B8%88%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9Fgif/%E4%B8%AA%E4%BA%BA%E8%AF%A6%E6%83%85.png" alt="表单设计"/>
   </td>
-  <td>
-    <span>待办任务</span>
-    <img src="https://images.gitee.com/uploads/images/2022/0424/171916_7ba22063_5096840.png" alt="代办任务"/>
-  </td>
-</tr>
-<tr>
-  <td>
-    <span>任务办理</span>
-    <img src="https://images.gitee.com/uploads/images/2022/0424/172204_04753399_5096840.png" alt="任务办理"/>
-  </td>
-  <td>
-    <span>流转记录</span>
-    <img src="https://images.gitee.com/uploads/images/2022/0424/172350_179e8341_5096840.png" alt="流转记录"/>
-  </td>
-</tr>
-<tr>
-  <td>
-    <span>流程跟踪</span>
-    <img src="https://images.gitee.com/uploads/images/2022/0424/172547_fe7414d4_5096840.png" alt="流程跟踪"/>
-  </td>
-  <td>
-    <span>流程完结</span>
-    <img src="https://images.gitee.com/uploads/images/2022/0424/173159_8cc57e74_5096840.png" alt="流程完结"/>
+   <td>
+    <span>工作室详情</span>
+    <img src="https://gulimail-lin.oss-cn-fuzhou.aliyuncs.com/%E5%90%8D%E5%B8%88%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9Fgif/%E5%B7%A5%E4%BD%9C%E5%AE%A4%E8%AF%A6%E6%83%85.png" alt="发起流程"/>
   </td>
 </tr>
 </tbody>
