@@ -23,7 +23,8 @@ import java.util.List;
 public class RoleController extends BaseController {
     @Autowired
     private RoleService roleService;
-    @Autowired
+
+
     private UserrService userrService;
     @Autowired
     private UserrRoleServicee userrRoleServicee;
@@ -56,6 +57,8 @@ public class RoleController extends BaseController {
 
         return AjaxResult.success(userrs);
     }
+
+
 
 
 

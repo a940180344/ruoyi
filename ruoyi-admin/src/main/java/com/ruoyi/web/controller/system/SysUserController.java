@@ -276,4 +276,12 @@ public class SysUserController extends BaseController
         userService.insertUserAuth(userId, roleIds);
         return success();
     }
+
+    @GetMapping("/teacher")
+    public AjaxResult getTeacher(){
+
+        return AjaxResult.success( userService.getTeacherMysql());
+    }
+
+
 }

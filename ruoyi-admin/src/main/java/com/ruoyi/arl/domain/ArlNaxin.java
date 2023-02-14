@@ -21,7 +21,7 @@ import java.util.Date;
  */
 
 @TableName(value = "arl_naxin")
-public class ArlNaxin implements Serializable
+public class ArlNaxin extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 

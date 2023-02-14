@@ -12,6 +12,7 @@ import com.ruoyi.arl.domain.ArlNaxin;
  * @author ruoyi
  * @date 2022-11-02
  */
+
 public interface ArlDelStioMapper extends BaseMapper<ArlDelStio>
 {
     /**
