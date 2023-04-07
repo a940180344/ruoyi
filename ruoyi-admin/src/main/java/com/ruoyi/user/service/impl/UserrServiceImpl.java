@@ -9,6 +9,9 @@ import com.ruoyi.user.service.RoleService;
 import com.ruoyi.user.service.UserrService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserrServiceImpl extends ServiceImpl<UserrMapper, Userr> implements UserrService {
+
 }

@@ -73,7 +73,11 @@ public class SysUserServiceImpl implements ISysUserService
     {
         return userMapper.selectUserList(user);
     }
+    @Override
+    public List<SysUser> getTeacherMysql(){
 
+        return userMapper.getTeacherMysql();
+    };
     /**
      * 根据条件分页查询已分配用户角色列表
      * 

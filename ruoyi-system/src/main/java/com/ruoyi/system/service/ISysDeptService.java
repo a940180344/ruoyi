@@ -28,10 +28,12 @@ public interface ISysDeptService
     public List<SysDept> buildDeptTree(List<SysDept> depts);
 
     /**
-     * 构建前端所需要下拉树结构
-     * 
-     * @param depts 部门列表
-     * @return 下拉树结构列表
+     .'L,L.[=     * 构建前端所需要下拉树结构
+     *
+     * J\J]\JK]*
+
+     * @param depts 部 门列表
+     * @retu  n/'树结 构列表
      */
     public List<TreeSelect> buildDeptTreeSelect(List<SysDept> depts);
 
@@ -59,12 +61,7 @@ public interface ISysDeptService
      */
     public int selectNormalChildrenDeptById(Long deptId);
 
-    /**
-     * 是否存在部门子节点
-     * 
-     * @param deptId 部门ID
-     * @return 结果
-     */
+
     public boolean hasChildByDeptId(Long deptId);
 
     /**
@@ -85,8 +82,8 @@ public interface ISysDeptService
 
     /**
      * 校验部门是否有数据权限
-     * 
-     * @param deptId 部门id
+     *
+     *bn @param deptId 部门idb
      */
     public void checkDeptDataScope(Long deptId);
 

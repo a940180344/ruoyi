@@ -49,6 +49,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="dataScope"     column="data_scope"    />
         <result property="status"       column="role_status"    />
     </resultMap>
+
+	<resultMap id="teacher" type="SysUser">
+		<id     property="userId"       column="user_id"        />
+		<result property="userName"     column="user_name"      />
+		<result property="nickName"     column="nick_name"      />
+	</resultMap>
 	
 	<sql id="selectUserVo">
         select u.user_id, u.dept_id, u.user_name, u.nick_name, u.email, u.avatar, u.phonenumber, u.password, u.sex, u.status, u.del_flag, u.login_ip, u.login_date, u.create_by, u.create_time, u.remark, u.translation,u.academy,u.grade,
@@ -66,6 +72,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where u.del_flag = '0'
 		<if test="userId != null and userId != 0">
 			AND u.user_id = #{userId}
+		</if>
+		<if test="sex != null and sex != 0">
+			AND u.sex = #{sex}
 		</if>
 		<if test="userName != null and userName != ''">
 			AND u.user_name like concat('%', #{userName}, '%')
@@ -145,7 +154,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="checkEmailUnique" parameterType="String" resultMap="SysUserResult">
 		select user_id, email from sys_user where email = #{email} limit 1
 	</select>
-	
+
+	<select id="getTeacherMysql" resultType="com.ruoyi.common.core.domain.entity.SysUser" resultMap="teacher"  >
+		SELECT u.user_id, u.user_name,u.nick_name
+        FROM sys_user_role ur
+        INNER JOIN sys_user u
+        ON ur.user_id=u.user_id and ur.role_id = 101
+	</select>
+
 	<insert id="insertUser" parameterType="SysUser" useGeneratedKeys="true" keyProperty="userId">
  		insert into sys_user(
  			<if test="userId != null and userId != 0">user_id,</if>
