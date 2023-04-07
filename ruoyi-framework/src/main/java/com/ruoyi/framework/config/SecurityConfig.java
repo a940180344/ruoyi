@@ -1,6 +1,7 @@
 package com.ruoyi.framework.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -31,6 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     /**
      * 自定义用户认证逻辑
      */
+    @Qualifier("userDetailsServiceImpl")
     @Autowired
     private UserDetailsService userDetailsService;
     
@@ -112,7 +114,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                 .antMatchers("/login", "/register", "/captchaImage").anonymous()
                 // 静态资源，可匿名访问
                 .antMatchers(HttpMethod.GET, "/", "/*.html", "/**/*.html", "/**/*.css", "/**/*.js", "/profile/**").permitAll()
-                .antMatchers("/swagger-ui.html", "/swagger-resources/**", "/webjars/**", "/*/api-docs", "/druid/**","/essay/essay/**").permitAll()
+                .antMatchers("/swagger-ui.html", "/swagger-resources/**", "/webjars/**", "/*/api-docs", "/druid/**","/essay/essay/**","/**/**").permitAll()
                 // 除上面外的所有请求全部需要鉴权认证
                 .anyRequest().authenticated()
                 .and()

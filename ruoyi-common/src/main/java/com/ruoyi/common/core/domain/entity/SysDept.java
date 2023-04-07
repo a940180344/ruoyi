@@ -51,7 +51,72 @@ public class SysDept extends BaseEntity
 
     /** 父部门名称 */
     private String parentName;
-    
+
+    private String announcement;
+    private String introduction;
+    private String fangx;
+    private String xuey;
+    private String renshu;
+    private String teachershu;
+    private String xmushu;
+
+
+    public String getAnnouncement() {
+        return announcement;
+    }
+
+    public String getRenshu() {
+        return renshu;
+    }
+
+    public void setRenshu(String renshu) {
+        this.renshu = renshu;
+    }
+
+    public String getTeachershu() {
+        return teachershu;
+    }
+
+    public void setTeachershu(String teachershu) {
+        this.teachershu = teachershu;
+    }
+
+    public String getXmushu() {
+        return xmushu;
+    }
+
+    public void setXmushu(String xmushu) {
+        this.xmushu = xmushu;
+    }
+
+    public void setAnnouncement(String announcement) {
+        this.announcement = announcement;
+    }
+
+    public String getIntroduction() {
+        return introduction;
+    }
+
+    public void setIntroduction(String introduction) {
+        this.introduction = introduction;
+    }
+
+    public String getFangx() {
+        return fangx;
+    }
+
+    public void setFangx(String fangx) {
+        this.fangx = fangx;
+    }
+
+    public String getXuey() {
+        return xuey;
+    }
+
+    public void setXuey(String xuey) {
+        this.xuey = xuey;
+    }
+
     /** 子部门 */
     private List<SysDept> children = new ArrayList<SysDept>();
 

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.studio.wenjian.mapper.AssessWenjianMapper">
+    
+    <resultMap type="AssessWenjian" id="AssessWenjianResult">
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="id"    column="id"    />
+        <result property="wenjian"    column="wenjian"    />
+        <result property="shuoming"    column="shuoming"    />
+        <result property="deptId"    column="dept_id"    />
+    </resultMap>
+
+    <sql id="selectAssessWenjianVo">
+        select create_by, create_time, id, wenjian, shuoming, dept_id from assess_wenjian
+    </sql>
+
+    <select id="selectAssessWenjianList" parameterType="AssessWenjian" resultMap="AssessWenjianResult">
+        <include refid="selectAssessWenjianVo"/>
+        <where>  
+            <if test="wenjian != null  and wenjian != ''"> and wenjian = #{wenjian}</if>
+            <if test="shuoming != null  and shuoming != ''"> and shuoming = #{shuoming}</if>
+        </where>
+    </select>
+    
+    <select id="selectAssessWenjianById" parameterType="Long" resultMap="AssessWenjianResult">
+        <include refid="selectAssessWenjianVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertAssessWenjian" parameterType="AssessWenjian" useGeneratedKeys="true" keyProperty="id">
+        insert into assess_wenjian
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="wenjian != null">wenjian,</if>
+            <if test="shuoming != null">shuoming,</if>
+            <if test="deptId != null">dept_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="wenjian != null">#{wenjian},</if>
+            <if test="shuoming != null">#{shuoming},</if>
+            <if test="deptId != null">#{deptId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateAssessWenjian" parameterType="AssessWenjian">
+        update assess_wenjian
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="wenjian != null">wenjian = #{wenjian},</if>
+            <if test="shuoming != null">shuoming = #{shuoming},</if>
+            <if test="deptId != null">dept_id = #{deptId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteAssessWenjianById" parameterType="Long">
+        delete from assess_wenjian where id = #{id}
+    </delete>
+
+    <delete id="deleteAssessWenjianByIds" parameterType="String">
+        delete from assess_wenjian where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

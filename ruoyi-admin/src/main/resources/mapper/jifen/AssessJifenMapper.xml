@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.jifen.mapper.AssessJifenMapper">
+    
+    <resultMap type="AssessJifen" id="AssessJifenResult">
+        <result property="id"    column="id"    />
+        <result property="studentName"    column="student_name"    />
+        <result property="studentId"    column="student_id"    />
+        <result property="jifen"    column="jifen"    />
+        <result property="cailiao"    column="cailiao"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="jingsai"    column="jingsai"    />
+        <result property="jiangxiang"    column="jiangxiang"    />
+        <result property="state"    column="state"    />
+    </resultMap>
+
+    <sql id="selectAssessJifenVo">
+        select id, student_name, student_id, jifen, cailiao, create_time, jingsai , state , jiangxiang  from assess_jifen
+    </sql>
+
+    <select id="selectAssessJifenList" parameterType="AssessJifen" resultMap="AssessJifenResult">
+        <include refid="selectAssessJifenVo"/>
+        <where>  
+            <if test="studentName != null  and studentName != ''"> and student_name like concat('%', #{studentName}, '%')</if>
+            <if test="studentId != null  and studentId != ''"> and student_id = #{studentId}</if>
+            <if test="jifen != null "> and jifen = #{jifen}</if>
+            <if test="cailiao != null  and cailiao != ''"> and cailiao = #{cailiao}</if>
+            <if test="createTime != null "> and create_time = #{createTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectAssessJifenById" parameterType="Long" resultMap="AssessJifenResult">
+        <include refid="selectAssessJifenVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertAssessJifen" parameterType="AssessJifen" useGeneratedKeys="true" keyProperty="id">
+        insert into assess_jifen
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="studentName != null">student_name,</if>
+            <if test="studentId != null">student_id,</if>
+            <if test="jifen != null">jifen,</if>
+            <if test="cailiao != null">cailiao,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="jingsai != null">jingsai,</if>
+            <if test="jiangxiang != null">jiangxiang,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="studentName != null">#{studentName},</if>
+            <if test="studentId != null">#{studentId},</if>
+            <if test="jifen != null">#{jifen},</if>
+            <if test="cailiao != null">#{cailiao},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="jingsai != null">#{jingsai},</if>
+            <if test="jiangxiang != null">#{jiangxiang},</if>
+         </trim>
+    </insert>
+
+    <update id="updateAssessJifen" parameterType="AssessJifen">
+        update assess_jifen
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="studentName != null">student_name = #{studentName},</if>
+            <if test="studentId != null">student_id = #{studentId},</if>
+            <if test="jifen != null">jifen = #{jifen},</if>
+            <if test="cailiao != null">cailiao = #{cailiao},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="jingsai != null">jingsai = #{jingsai},</if>
+            <if test="jiangxiang != null">jiangxiang = #{jiangxiang},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteAssessJifenById" parameterType="Long">
+        delete from assess_jifen where id = #{id}
+    </delete>
+
+    <delete id="deleteAssessJifenByIds" parameterType="String">
+        delete from assess_jifen where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -40,8 +40,6 @@ public class ArlHostController extends BaseController {
   @ApiOperation("修改进程")
   @PostMapping("/updata")
   public AjaxResult updata(@RequestBody  List<ArlSub> acceptHS){
-
-
     //先把旧进程设为废弃状态
     Long Host_id = acceptHS.get(0).getHostId();//需要修改的进程id
     ArlHost oldArlHost = new ArlHost();
@@ -63,16 +61,12 @@ public class ArlHostController extends BaseController {
     //插入新进程
     newArlHost.setName(oldArlHost.getName());
     arlHostService.save(newArlHost);
-
-
-
     //插入新进程的子进程
     for (ArlSub arlSub:acceptHS){
       arlSub.setHostId(newArlHost.getId());
       arlSub.setId(null);
     }
     arlSubService.saveBatch(acceptHS);
-
     return AjaxResult.success(acceptHS);
   }
   /**
