@@ -24,7 +24,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/studio/application")
-public class ArlStioController extends BaseController {
+public class tets extends BaseController {
     @Autowired
     private IArlHostService arlHostService;
 
@@ -90,6 +90,7 @@ public class ArlStioController extends BaseController {
     public AjaxResult getList(@RequestBody SeachFrom seachFrom){
         LoginUser loginUser = getLoginUser();
         SysUser user = loginUser.getUser();
+
         List<SysRole> roleIds = user.getRoles();
         Long roleId = roleIds.get(0).getRoleId();
         String academy = user.getAcademy();
@@ -103,7 +104,6 @@ public class ArlStioController extends BaseController {
         if(seachFrom.getProStarts() != null){
             queryWrapper.eq("start",seachFrom.getProStarts());
         }
-
         queryWrapper.eq("stio_appover",roleId);//
 
         queryWrapper.eq("stio_academy",academy);
@@ -187,16 +187,16 @@ public class ArlStioController extends BaseController {
 
     }
 
-        @GetMapping(value = "/{id}")
-        public AjaxResult getInfo(@PathVariable("id") Long id)
-        {
-            return AjaxResult.success(arlStioService.getById(id));
-        }
+    @GetMapping(value = "/{id}")
+    public AjaxResult getInfo(@PathVariable("id") Long id)
+    {
+        return AjaxResult.success(arlStioService.getById(id));
+    }
 
     @PutMapping
     public AjaxResult edit(@RequestBody ArlStio arlStio)
     {
-    arlStio.setStart("待审批");
-       return toAjax(arlStioService.updateById(arlStio));
+        arlStio.setStart("待审批");
+        return toAjax(arlStioService.updateById(arlStio));
     }
 }

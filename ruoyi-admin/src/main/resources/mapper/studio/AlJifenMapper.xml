@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.jifen.mapper.AlJifenMapper">
+    
+    <resultMap type="AlJifen" id="AlJifenResult">
+        <result property="user"    column="user"    />
+        <result property="id"    column="id"    />
+        <result property="jifen"    column="jifen"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="xmuming"    column="xmuming"    />
+    </resultMap>
+
+    <sql id="selectAlJifenVo">
+        select user, id, jifen, create_time, xmuming from al_jifen
+    </sql>
+
+    <select id="selectAlJifenList" parameterType="AlJifen" resultMap="AlJifenResult">
+        <include refid="selectAlJifenVo"/>
+        <where>  
+            <if test="user != null  and user != ''"> and user = #{user}</if>
+            <if test="id != null "> and id = #{id}</if>
+            <if test="jifen != null  and jifen != ''"> and jifen = #{jifen}</if>
+            <if test="createTime != null "> and create_time = #{createTime}</if>
+            <if test="xmuming != null  and xmuming != ''"> and xmuming = #{xmuming}</if>
+        </where>
+    </select>
+    
+    <select id="selectAlJifenById" parameterType="Long" resultMap="AlJifenResult">
+        <include refid="selectAlJifenVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertAlJifen" parameterType="AlJifen" useGeneratedKeys="true" keyProperty="id">
+        insert into al_jifen
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="user != null">user,</if>
+            <if test="jifen != null">jifen,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="xmuming != null">xmuming,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="user != null">#{user},</if>
+            <if test="jifen != null">#{jifen},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="xmuming != null">#{xmuming},</if>
+         </trim>
+    </insert>
+
+    <update id="updateAlJifen" parameterType="AlJifen">
+        update al_jifen
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="user != null">user = #{user},</if>
+            <if test="jifen != null">jifen = #{jifen},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="xmuming != null">xmuming = #{xmuming},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteAlJifenById" parameterType="Long">
+        delete from al_jifen where id = #{id}
+    </delete>
+
+    <delete id="deleteAlJifenByIds" parameterType="String">
+        delete from al_jifen where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

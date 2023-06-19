@@ -37,7 +37,7 @@ public class SysDepController extends BaseController
     /**
      * 查询部门列表
      */
-    @PreAuthorize("@ss.hasPermi('dept:dept:list')")
+
     @GetMapping("/list")
     public TableDataInfo list(SysDep sysDep)
     {
@@ -49,7 +49,7 @@ public class SysDepController extends BaseController
     /**
      * 导出部门列表
      */
-    @PreAuthorize("@ss.hasPermi('dept:dept:export')")
+
     @Log(title = "部门", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, SysDep sysDep)
@@ -62,7 +62,7 @@ public class SysDepController extends BaseController
     /**
      * 获取部门详细信息
      */
-    @PreAuthorize("@ss.hasPermi('dept:dept:query')")
+
     @GetMapping(value = "/{deptId}")
     public AjaxResult getInfo(@PathVariable("deptId") Long deptId)
     {

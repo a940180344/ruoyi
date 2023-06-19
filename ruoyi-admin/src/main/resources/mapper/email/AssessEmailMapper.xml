@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.email.mapper.AssessEmailMapper">
+    
+    <resultMap type="AssessEmail" id="AssessEmailResult">
+        <result property="id"    column="id"    />
+        <result property="fasonguser"    column="fasonguser"    />
+        <result property="jieshouuser"    column="jieshouuser"    />
+        <result property="content"    column="content"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="wenjian"    column="wenjian"    />
+    </resultMap>
+
+    <sql id="selectAssessEmailVo">
+        select id, fasonguser, jieshouuser, content, create_by, create_time, wenjian from assess_email
+    </sql>
+
+    <select id="selectAssessEmailList" parameterType="AssessEmail" resultMap="AssessEmailResult">
+        <include refid="selectAssessEmailVo"/>
+        <where>  
+            <if test="fasonguser != null  and fasonguser != ''"> and fasonguser = #{fasonguser}</if>
+            <if test="jieshouuser != null  and jieshouuser != ''"> and jieshouuser = #{jieshouuser}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="wenjian != null  and wenjian != ''"> and wenjian = #{wenjian}</if>
+        </where>
+    </select>
+    
+    <select id="selectAssessEmailById" parameterType="Long" resultMap="AssessEmailResult">
+        <include refid="selectAssessEmailVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertAssessEmail" parameterType="AssessEmail" useGeneratedKeys="true" keyProperty="id">
+        insert into assess_email
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fasonguser != null">fasonguser,</if>
+            <if test="jieshouuser != null">jieshouuser,</if>
+            <if test="content != null">content,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="wenjian != null">wenjian,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="fasonguser != null">#{fasonguser},</if>
+            <if test="jieshouuser != null">#{jieshouuser},</if>
+            <if test="content != null">#{content},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="wenjian != null">#{wenjian},</if>
+         </trim>
+    </insert>
+
+    <update id="updateAssessEmail" parameterType="AssessEmail">
+        update assess_email
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="fasonguser != null">fasonguser = #{fasonguser},</if>
+            <if test="jieshouuser != null">jieshouuser = #{jieshouuser},</if>
+            <if test="content != null">content = #{content},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="wenjian != null">wenjian = #{wenjian},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteAssessEmailById" parameterType="Long">
+        delete from assess_email where id = #{id}
+    </delete>
+
+    <delete id="deleteAssessEmailByIds" parameterType="String">
+        delete from assess_email where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

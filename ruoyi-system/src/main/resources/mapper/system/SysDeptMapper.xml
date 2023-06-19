@@ -20,10 +20,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="createTime" column="create_time" />
 		<result property="updateBy"   column="update_by"   />
 		<result property="updateTime" column="update_time" />
+
+		<result property="announcement" column="announcement" />
+		<result property="introduction" column="introduction" />
+		<result property="fangx" column="fangx" />
+		<result property="xuey" column="xuey" />
+
+		<result property="renshu" column="renshu" />
+		<result property="teachershu" column="teachershu" />
+		<result property="xmushu" column="xmushu" />
 	</resultMap>
 	
 	<sql id="selectDeptVo">
-        select d.dept_id, d.parent_id, d.ancestors, d.dept_name, d.order_num, d.leader, d.phone, d.email, d.status, d.del_flag, d.create_by, d.create_time 
+        select d.dept_id, d.parent_id, d.ancestors, d.dept_name, d.order_num, d.leader, d.phone, d.email, d.status, d.del_flag, d.create_by, d.create_time ,d.announcement,d.introduction,d.fangx,d.xuey,d.renshu,d.teachershu,d.xmushu
         from sys_dept d
     </sql>
     

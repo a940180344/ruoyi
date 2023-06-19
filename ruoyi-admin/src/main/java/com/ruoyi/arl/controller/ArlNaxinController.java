@@ -187,7 +187,7 @@ public class ArlNaxinController extends BaseController
         }
 
         queryWrapper.eq("stio_id",deptId);//
-        queryWrapper.eq("app_order",roleId);//
+//        queryWrapper.eq("app_order",roleId);//
         queryWrapper.orderByDesc("start");
         IPage<ArlNaxin> ArlStioIPage = arlNaxinService.page(new com.baomidou.mybatisplus.extension.plugins.pagination.Page<>(seachFrom.getPage(),seachFrom.getPageSize()),queryWrapper);
 
@@ -201,53 +201,61 @@ public class ArlNaxinController extends BaseController
     @ApiOperation("通过审批信息(纳新)")
     @PostMapping("/pass")
     public AjaxResult pass(@RequestBody ArlNaxin arlNaxin){
+
         arlNaxin.setStart("通过");
-        Long hostId = arlNaxin.getHostId();
-        Long appOrder = arlNaxin.getAppOrder();
         LocalDate date = LocalDate.now();
         arlNaxin.setCreateTime(DateUtils.getNowDate());
+        arlNaxinService.updateById(arlNaxin);
+        return AjaxResult.success("操作成功");
 
-        QueryWrapper<ArlSub> queryWrapper=new QueryWrapper();
-        queryWrapper.eq("host_id",hostId);
-        List<ArlSub> arlSubs = arlSubService.list(queryWrapper);//工作室申请所有子流程
-
-        if(arlSubs.size() == appOrder){
-            //整个审批流程结束
-            arlNaxin.setStart("纳新通过");
-            arlNaxinService.updateById(arlNaxin);
-            /***
-             * 修改学生属性为加入工作室
-             */
-            UpdateWrapper<UserrRole> updateWrapper = new UpdateWrapper<>();
-            updateWrapper.eq("user_id",arlNaxin.getUserId());
-            UserrRole user = new UserrRole();
-            //user.setRoleId(100L);//添加学生角色
-            userrRoleServicee.update(user, updateWrapper);
-
-
-            return AjaxResult.success("操作成功");
-        }
-        if(arlSubs.size() > appOrder){
-            //进入下一个审批
-
-            arlNaxin.setStart("通过");
-            arlNaxinService.updateById(arlNaxin);
-            arlNaxin.setAppOrder(appOrder+1);
-            arlNaxin.setId(null);
-            arlNaxin.setStart("待审批");
-
-//            Map<String , Object> map = new HashMap<>();
-//            map.put("host_id" , hostId);
-//            map.put("order",appOrder);
-//            QueryWrapper<ArlSub> Wrapper=new QueryWrapper();
-//            Wrapper.allEq(map);
-//            List<ArlSub> arlSub = arlSubService.list(Wrapper);
-
-            arlNaxin.setNaxinAppover(arlSubs.get(appOrder.intValue()).getRoleId());
-            arlNaxinService.save(arlNaxin);
-            return AjaxResult.success("操作成功");
-        }
-        return AjaxResult.error("操作失败");
+//
+//        arlNaxin.setStart("通过");
+//        Long hostId = arlNaxin.getHostId();
+//        Long appOrder = arlNaxin.getAppOrder();
+//        LocalDate date = LocalDate.now();
+//        arlNaxin.setCreateTime(DateUtils.getNowDate());
+//
+//        QueryWrapper<ArlSub> queryWrapper=new QueryWrapper();
+//        queryWrapper.eq("host_id",hostId);
+//        List<ArlSub> arlSubs = arlSubService.list(queryWrapper);//工作室申请所有子流程
+//
+//        if(arlSubs.size() == appOrder){
+//            //整个审批流程结束
+//            arlNaxin.setStart("纳新通过");
+//            arlNaxinService.updateById(arlNaxin);
+//            /***
+//             * 修改学生属性为加入工作室
+//             */
+//            UpdateWrapper<UserrRole> updateWrapper = new UpdateWrapper<>();
+//            updateWrapper.eq("user_id",arlNaxin.getUserId());
+//            UserrRole user = new UserrRole();
+//            //user.setRoleId(100L);//添加学生角色
+//            userrRoleServicee.update(user, updateWrapper);
+//
+//
+//            return AjaxResult.success("操作成功");
+//        }
+//        if(arlSubs.size() > appOrder){
+//            //进入下一个审批
+//
+//            arlNaxin.setStart("通过");
+//            arlNaxinService.updateById(arlNaxin);
+//            arlNaxin.setAppOrder(appOrder+1);
+//            arlNaxin.setId(null);
+//            arlNaxin.setStart("待审批");
+//
+////            Map<String , Object> map = new HashMap<>();
+////            map.put("host_id" , hostId);
+////            map.put("order",appOrder);
+////            QueryWrapper<ArlSub> Wrapper=new QueryWrapper();
+////            Wrapper.allEq(map);
+////            List<ArlSub> arlSub = arlSubService.list(Wrapper);
+//
+//            arlNaxin.setNaxinAppover(arlSubs.get(appOrder.intValue()).getRoleId());
+//            arlNaxinService.save(arlNaxin);
+//            return AjaxResult.success("操作成功");
+//        }
+//        return AjaxResult.error("操作失败");
     }
 
     /**
